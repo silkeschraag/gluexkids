@@ -1,19 +1,19 @@
 # PowerUpKids ⚡
 
 **Bewegung, Mindset, Stärke.** Eine Expo-App (iOS, Android, Web) für Trainerinnen und Trainer im Kindertraining,
-mit Aufwärmspielen und Koordinationsübungen für Kinder von 4 bis 12 Jahren.
+mit Aufwärmspielen, Koordinations- und Kraftübungen für Kinder von 4 bis 12 Jahren.
 
 ## Funktionen
 
-- **Übungskatalog** mit 35 Übungen in 5 Rubriken:
-  🔥 Aufwärmspiele · 🤾 Hand-Auge · ⚽ Fuß-Auge · ⚡ Schnelligkeit & Reaktion · 🤸 Gleichgewicht
+- **Übungskatalog** mit 42 Übungen in 6 Rubriken:
+  🔥 Aufwärmspiele · 🤾 Hand-Auge · ⚽ Fuß-Auge · ⚡ Schnelligkeit & Reaktion · 🤸 Gleichgewicht · 💪 Kraft
 - **Filter** (kombinierbar, auf der Startseite und in jeder Rubrik):
   - Rubrik
   - Alter (4–6, 7–9, 10–12 Jahre)
   - Dauer (bis 6 Min, 7–10 Min, über 10 Min)
   - Schwierigkeit (leicht, mittel, schwer)
   - Material: Wähle, was du dabei hast, und es erscheinen nur Übungen, die damit auskommen. Oder wähle „Ohne Material“.
-- **Suche** nach Name, Ziel oder Material.
+- **Suche** in Name, Ziel, Aufbau, Ablauf und Material.
 - **Einheit zusammenstellen**: Übungen per „＋ Einheit“ sammeln, sortieren, austauschen und Phasen zuordnen
   (Aufwärmen, Hauptteil, Abschluss). Alternativ macht die App einen automatischen Vorschlag passend zu Alter,
   Dauer und Schwerpunkten.

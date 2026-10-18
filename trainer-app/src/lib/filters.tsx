@@ -45,7 +45,7 @@ export function countActiveFilters(f: Filters, { ignoreCategories = false } = {}
 
 export function matchesFilters(e: Exercise, f: Filters) {
   const q = f.query.trim().toLowerCase();
-  if (q && ![e.title, e.goal, ...e.material].some((text) => text.toLowerCase().includes(q))) return false;
+  if (q && ![e.title, e.goal, e.setup, ...e.steps, ...e.material].some((text) => text.toLowerCase().includes(q))) return false;
   if (f.categories.length && !f.categories.includes(e.category)) return false;
   if (f.age && !e.ages.includes(f.age)) return false;
   if (

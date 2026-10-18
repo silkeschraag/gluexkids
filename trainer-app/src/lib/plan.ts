@@ -11,7 +11,7 @@ export const PHASE_LABELS: Record<PlanPhase, string> = {
   abschluss: 'Abschluss',
 };
 
-export type CoordinationFocus = Exclude<CategoryId, 'aufwaermen'>;
+export type FocusCategory = Exclude<CategoryId, 'aufwaermen'>;
 
 function shuffle<T>(items: T[]): T[] {
   const copy = [...items];
@@ -39,11 +39,11 @@ export function resolveItems(items: PlanItem[]) {
 }
 
 /**
- * Stellt eine Trainingseinheit zusammen: ein Aufwärmspiel, Koordinationsübungen
+ * Stellt eine Trainingseinheit zusammen: ein Aufwärmspiel, Übungen
  * aus den gewählten Schwerpunkten (abwechselnd) bis die Zielzeit erreicht ist,
  * und ein lockeres Abschlussspiel.
  */
-export function generatePlan(age: AgeGroup | null, totalMinutes: number, focus: CoordinationFocus[]): PlanItem[] {
+export function generatePlan(age: AgeGroup | null, totalMinutes: number, focus: FocusCategory[]): PlanItem[] {
   const pool = forAge(age);
   const warmups = shuffle(pool.filter((e) => e.category === 'aufwaermen'));
   const warmup = warmups[0];
@@ -56,7 +56,7 @@ export function generatePlan(age: AgeGroup | null, totalMinutes: number, focus: 
   const reserved = (warmup?.duration ?? 0) + (finale?.duration ?? 0);
   let remaining = totalMinutes - reserved;
 
-  const queues = (focus.length ? focus : (['hand-auge', 'fuss-auge', 'schnelligkeit'] as CoordinationFocus[])).map(
+  const queues = (focus.length ? focus : (['hand-auge', 'fuss-auge', 'schnelligkeit'] as FocusCategory[])).map(
     (category) => shuffle(pool.filter((e) => e.category === category)),
   );
 

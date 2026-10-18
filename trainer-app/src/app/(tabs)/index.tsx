@@ -24,7 +24,7 @@ export default function HomeScreen() {
           </Text>
           <Text style={styles.slogan}>{BRAND.slogan.split(', ').join(' · ')}</Text>
           <Text style={styles.heroText}>
-            {EXERCISES.length} Aufwärmspiele & Koordinationsübungen für dein Kindertraining.
+            {EXERCISES.length} Übungen für dein Kindertraining: Aufwärmen, Koordination & Kraft.
           </Text>
         </View>
 

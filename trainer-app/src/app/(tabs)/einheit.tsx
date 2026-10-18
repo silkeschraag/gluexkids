@@ -13,14 +13,14 @@ import {
   resolveItems,
   swapExercise,
   totalDuration,
-  type CoordinationFocus,
+  type FocusCategory,
   type PlanPhase,
 } from '../../lib/plan';
 import { useSession } from '../../lib/session';
 import { colors, font, radius, spacing } from '../../theme';
 
 const DURATIONS = [30, 45, 60, 90];
-const FOCUS_OPTIONS: CoordinationFocus[] = ['hand-auge', 'fuss-auge', 'schnelligkeit', 'gleichgewicht'];
+const FOCUS_OPTIONS: FocusCategory[] = ['hand-auge', 'fuss-auge', 'schnelligkeit', 'gleichgewicht', 'kraft'];
 const PHASES: PlanPhase[] = ['aufwaermen', 'hauptteil', 'abschluss'];
 const PHASE_COLORS: Record<PlanPhase, string> = {
   aufwaermen: colors.orange,
@@ -57,7 +57,7 @@ export default function SessionScreen() {
   const { session, update, remove, move, setPhase, clear } = useSession();
   const [showGenerator, setShowGenerator] = useState(false);
   const [minutes, setMinutes] = useState(60);
-  const [focus, setFocus] = useState<CoordinationFocus[]>(['hand-auge', 'fuss-auge', 'schnelligkeit']);
+  const [focus, setFocus] = useState<FocusCategory[]>(['hand-auge', 'fuss-auge', 'schnelligkeit']);
   const [detailed, setDetailed] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -65,7 +65,7 @@ export default function SessionScreen() {
   const exercises = items.map((i) => i.exercise);
   const materials = materialList(exercises);
 
-  const toggleFocus = (f: CoordinationFocus) =>
+  const toggleFocus = (f: FocusCategory) =>
     setFocus((current) => (current.includes(f) ? current.filter((x) => x !== f) : [...current, f]));
 
   const exportPdf = async (action: 'share' | 'print') => {

@@ -44,6 +44,15 @@ export const CATEGORIES: Category[] = [
     color: colors.blueDark,
     description: 'Balancieren, Stabilisieren und Körperspannung – die Basis für jede andere koordinative Fähigkeit.',
   },
+  {
+    id: 'kraft',
+    title: 'Kraft',
+    short: 'Kraft',
+    emoji: '💪',
+    color: colors.red,
+    description:
+      'Spielerisches Krafttraining mit dem eigenen Körpergewicht: Tiergänge, Stützspiele, Sprünge und Partnerübungen.',
+  },
 ];
 
 export function getCategory(id: CategoryId): Category {
