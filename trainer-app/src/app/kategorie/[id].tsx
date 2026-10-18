@@ -1,33 +1,27 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { ExerciseCard } from '../../components/ExerciseCard';
-import { Chip } from '../../components/ui';
+import { FilterPanel } from '../../components/FilterPanel';
 import { CATEGORIES } from '../../data/categories';
-import { EXERCISES } from '../../data/exercises';
-import { AGE_GROUPS, type AgeGroup } from '../../data/types';
+import { filterExercises, useFilters } from '../../lib/filters';
 import { colors, font, spacing } from '../../theme';
 
 export default function CategoryScreen() {
-  const params = useLocalSearchParams<{ id: string; age?: string }>();
-  const category = CATEGORIES.find((c) => c.id === params.id);
-  const [age, setAge] = useState<AgeGroup | null>(
-    AGE_GROUPS.includes(params.age as AgeGroup) ? (params.age as AgeGroup) : null,
-  );
-
-  const exercises = useMemo(
-    () => EXERCISES.filter((e) => e.category === category?.id && (!age || e.ages.includes(age))),
-    [category, age],
-  );
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const category = CATEGORIES.find((c) => c.id === id);
+  const { filters } = useFilters();
 
   if (!category) {
     return (
       <View style={styles.empty}>
-        <Text style={font.h2}>Kategorie nicht gefunden</Text>
+        <Text style={font.h2}>Rubrik nicht gefunden</Text>
       </View>
     );
   }
+
+  // Die Rubrik ergibt sich aus der Seite, alle anderen Filter gelten weiter.
+  const exercises = filterExercises({ ...filters, query: '', categories: [category.id] });
 
   return (
     <>
@@ -44,21 +38,11 @@ export default function CategoryScreen() {
               <Text style={styles.bannerTitle}>{category.title}</Text>
               <Text style={styles.bannerText}>{category.description}</Text>
             </View>
-            <View style={styles.ageRow}>
-              <Chip label="Alle" active={age === null} onPress={() => setAge(null)} color={category.color} />
-              {AGE_GROUPS.map((group) => (
-                <Chip
-                  key={group}
-                  label={`${group} J.`}
-                  active={age === group}
-                  onPress={() => setAge(group)}
-                  color={category.color}
-                />
-              ))}
-            </View>
+            <FilterPanel hideCategories color={category.color} />
+            <Text style={font.small}>{exercises.length} Übungen</Text>
           </View>
         }
-        ListEmptyComponent={<Text style={font.small}>Für diese Altersgruppe gibt es hier noch keine Übungen.</Text>}
+        ListEmptyComponent={<Text style={font.small}>Keine Übung passt zu den gewählten Filtern.</Text>}
         renderItem={({ item }) => <ExerciseCard exercise={item} />}
       />
     </>
@@ -67,11 +51,10 @@ export default function CategoryScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: spacing.lg, paddingBottom: spacing.xxl },
-  header: { gap: spacing.lg, marginBottom: spacing.lg },
+  header: { gap: spacing.md, marginBottom: spacing.md },
   banner: { borderRadius: 24, padding: spacing.xl, gap: 6 },
   bannerEmoji: { fontSize: 40 },
   bannerTitle: { fontSize: 24, fontWeight: '900', color: colors.white },
   bannerText: { fontSize: 15, lineHeight: 21, color: colors.white },
-  ageRow: { flexDirection: 'row', gap: spacing.sm, flexWrap: 'wrap' },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center' },
 });

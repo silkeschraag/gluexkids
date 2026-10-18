@@ -1,14 +1,14 @@
-import { EXERCISES } from '../data/exercises';
+import { EXERCISES, getExercise } from '../data/exercises';
 import type { AgeGroup, CategoryId, Exercise } from '../data/types';
 
 export type PlanPhase = 'aufwaermen' | 'hauptteil' | 'abschluss';
 
-export type PlanItem = { phase: PlanPhase; exercise: Exercise };
+export type PlanItem = { phase: PlanPhase; exerciseId: string };
 
 export const PHASE_LABELS: Record<PlanPhase, string> = {
   aufwaermen: 'Aufwärmen',
   hauptteil: 'Hauptteil',
-  abschluss: 'Abschlussspiel',
+  abschluss: 'Abschluss',
 };
 
 export type CoordinationFocus = Exclude<CategoryId, 'aufwaermen'>;
@@ -22,8 +22,20 @@ function shuffle<T>(items: T[]): T[] {
   return copy;
 }
 
-function forAge(age: AgeGroup) {
-  return EXERCISES.filter((e) => e.ages.includes(age));
+function forAge(age: AgeGroup | null) {
+  return age ? EXERCISES.filter((e) => e.ages.includes(age)) : EXERCISES;
+}
+
+export function defaultPhase(exercise: Exercise): PlanPhase {
+  return exercise.category === 'aufwaermen' ? 'aufwaermen' : 'hauptteil';
+}
+
+/** Übungen zu den Einträgen einer Einheit (unbekannte IDs werden übersprungen). */
+export function resolveItems(items: PlanItem[]) {
+  return items.flatMap((item) => {
+    const exercise = getExercise(item.exerciseId);
+    return exercise ? [{ ...item, exercise }] : [];
+  });
 }
 
 /**
@@ -31,15 +43,15 @@ function forAge(age: AgeGroup) {
  * aus den gewählten Schwerpunkten (abwechselnd) bis die Zielzeit erreicht ist,
  * und ein lockeres Abschlussspiel.
  */
-export function generatePlan(age: AgeGroup, totalMinutes: number, focus: CoordinationFocus[]): PlanItem[] {
+export function generatePlan(age: AgeGroup | null, totalMinutes: number, focus: CoordinationFocus[]): PlanItem[] {
   const pool = forAge(age);
   const warmups = shuffle(pool.filter((e) => e.category === 'aufwaermen'));
   const warmup = warmups[0];
-  // Abschluss: ein Spiel, das nicht schon zum Aufwärmen dran war; gern mit Spaßfaktor.
+  // Abschluss: ein Spiel, das nicht schon zum Aufwärmen dran war.
   const finale = warmups.find((e) => e !== warmup) ?? warmup;
 
   const items: PlanItem[] = [];
-  if (warmup) items.push({ phase: 'aufwaermen', exercise: warmup });
+  if (warmup) items.push({ phase: 'aufwaermen', exerciseId: warmup.id });
 
   const reserved = (warmup?.duration ?? 0) + (finale?.duration ?? 0);
   let remaining = totalMinutes - reserved;
@@ -54,31 +66,32 @@ export function generatePlan(age: AgeGroup, totalMinutes: number, focus: Coordin
     for (const queue of queues) {
       const next = queue.shift();
       if (!next || next.duration > remaining + 2) continue;
-      items.push({ phase: 'hauptteil', exercise: next });
+      items.push({ phase: 'hauptteil', exerciseId: next.id });
       remaining -= next.duration;
       added = true;
       if (remaining <= 4) break;
     }
   }
 
-  if (finale) items.push({ phase: 'abschluss', exercise: finale });
+  if (finale) items.push({ phase: 'abschluss', exerciseId: finale.id });
   return items;
 }
 
-/** Ersetzt eine Übung durch eine andere passende Übung derselben Kategorie. */
-export function swapExercise(items: PlanItem[], index: number, age: AgeGroup): PlanItem[] {
-  const current = items[index];
-  const used = new Set(items.map((i) => i.exercise.id));
-  const candidates = forAge(age).filter((e) => e.category === current.exercise.category && !used.has(e.id));
+/** Ersetzt eine Übung durch eine andere passende Übung derselben Rubrik. */
+export function swapExercise(items: PlanItem[], index: number, age: AgeGroup | null): PlanItem[] {
+  const current = getExercise(items[index].exerciseId);
+  if (!current) return items;
+  const used = new Set(items.map((i) => i.exerciseId));
+  const candidates = forAge(age).filter((e) => e.category === current.category && !used.has(e.id));
   if (!candidates.length) return items;
   const replacement = shuffle(candidates)[0];
-  return items.map((item, i) => (i === index ? { ...item, exercise: replacement } : item));
+  return items.map((item, i) => (i === index ? { ...item, exerciseId: replacement.id } : item));
 }
 
-export function totalDuration(items: PlanItem[]) {
-  return items.reduce((sum, item) => sum + item.exercise.duration, 0);
+export function totalDuration(exercises: Exercise[]) {
+  return exercises.reduce((sum, e) => sum + e.duration, 0);
 }
 
-export function materialList(items: PlanItem[]) {
-  return [...new Set(items.flatMap((i) => i.exercise.material))].sort((a, b) => a.localeCompare(b, 'de'));
+export function materialList(exercises: Exercise[]) {
+  return [...new Set(exercises.flatMap((e) => e.material))].sort((a, b) => a.localeCompare(b, 'de'));
 }

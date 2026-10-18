@@ -5,7 +5,9 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Card, IntensityDots, Tag } from '../../components/ui';
 import { getCategory } from '../../data/categories';
 import { getExercise } from '../../data/exercises';
+import { DIFFICULTY_LABELS } from '../../data/types';
 import { useFavorites } from '../../lib/favorites';
+import { useSession } from '../../lib/session';
 import { formatSeconds, useIntervalTimer } from '../../lib/useIntervalTimer';
 import { colors, font, radius, spacing } from '../../theme';
 
@@ -46,6 +48,7 @@ export default function ExerciseScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const exercise = getExercise(id);
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { has, toggle } = useSession();
 
   if (!exercise) {
     return (
@@ -57,6 +60,7 @@ export default function ExerciseScreen() {
 
   const category = getCategory(exercise.category);
   const favorite = isFavorite(exercise.id);
+  const inSession = has(exercise.id);
 
   return (
     <>
@@ -88,11 +92,22 @@ export default function ExerciseScreen() {
           <Tag>⏱ {exercise.duration} Min</Tag>
           <Tag>👧 {exercise.ages.join(' · ')} Jahre</Tag>
           <Tag>👥 {exercise.players}</Tag>
+          <Tag>
+            {'●'.repeat(exercise.difficulty)}
+            {'○'.repeat(3 - exercise.difficulty)} {DIFFICULTY_LABELS[exercise.difficulty]}
+          </Tag>
           <View style={styles.intensity}>
             <IntensityDots level={exercise.intensity} />
-            <Text style={font.small}>{INTENSITY_LABEL[exercise.intensity]}</Text>
+            <Text style={font.small}>Intensität {INTENSITY_LABEL[exercise.intensity]}</Text>
           </View>
         </View>
+
+        <Button
+          label={inSession ? '✓ In deiner Einheit – entfernen' : '＋ Zur Einheit hinzufügen'}
+          color={inSession ? colors.green : colors.orange}
+          variant={inSession ? 'outline' : 'solid'}
+          onPress={() => toggle(exercise.id)}
+        />
 
         <ExerciseTimer minutes={exercise.duration} color={category.color} />
 

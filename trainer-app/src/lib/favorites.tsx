@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
-const STORAGE_KEY = 'gluexkids-trainer/favorites';
+const STORAGE_KEY = 'powerupkids/favorites';
 
 type FavoritesContextValue = {
   favorites: string[];

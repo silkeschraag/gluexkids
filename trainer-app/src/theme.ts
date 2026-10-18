@@ -1,4 +1,4 @@
-// Farben angelehnt an das GlüXkids-Branding (index.html im Repo-Root).
+// PowerUpKids-Farbpalette.
 export const colors = {
   background: '#F8F2E5',
   surface: '#FDFBF6',

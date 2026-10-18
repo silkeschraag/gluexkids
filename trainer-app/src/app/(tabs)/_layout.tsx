@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { Text } from 'react-native';
 
+import { useSession } from '../../lib/session';
 import { colors } from '../../theme';
 
 function TabIcon({ emoji, focused }: { emoji: string; focused: boolean }) {
@@ -8,6 +9,7 @@ function TabIcon({ emoji, focused }: { emoji: string; focused: boolean }) {
 }
 
 export default function TabsLayout() {
+  const { session } = useSession();
   return (
     <Tabs
       screenOptions={{
@@ -30,10 +32,12 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="training"
+        name="einheit"
         options={{
-          title: 'Training',
-          headerTitle: 'Training planen',
+          title: 'Einheit',
+          headerTitle: 'Meine Einheit',
+          tabBarBadge: session.items.length || undefined,
+          tabBarBadgeStyle: { backgroundColor: colors.orange },
           tabBarIcon: ({ focused }) => <TabIcon emoji="📋" focused={focused} />,
         }}
       />

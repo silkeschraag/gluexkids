@@ -1,31 +1,39 @@
 {
   "expo": {
-    "name": "GlüXkids Trainer",
-    "slug": "gluexkids-trainer",
-    "scheme": "gluexkids-trainer",
+    "name": "PowerUpKids",
+    "slug": "powerupkids",
+    "scheme": "powerupkids",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#F8F2E5",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "de.powerupkids.app"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#F8F2E5",
+        "backgroundColor": "#F85C0A",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "de.powerupkids.app"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "output": "single"
     },
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      "expo-sharing"
+    ],
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F8F2E5"
+    }
   }
 }
