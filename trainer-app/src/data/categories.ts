@@ -53,6 +53,24 @@ export const CATEGORIES: Category[] = [
     description:
       'Spielerisches Krafttraining mit dem eigenen Körpergewicht: Tiergänge, Stützspiele, Sprünge und Partnerübungen.',
   },
+  {
+    id: 'innere-staerke',
+    title: 'Innere Stärke',
+    short: 'Innere Stärke',
+    emoji: '🦁',
+    color: colors.purple,
+    description:
+      'Mut, Selbstvertrauen und ein starkes Mindset: Spiele rund um eigene Stärken, Fehler als Lernchance und Ruhe im Kopf.',
+  },
+  {
+    id: 'hilfe-holen',
+    title: 'Hilfe holen',
+    short: 'Hilfe holen',
+    emoji: '🤝',
+    color: colors.teal,
+    description:
+      'Um Hilfe bitten, Hilfe annehmen, „Stopp!“ sagen und Vertrauenspersonen kennen – spielerisch und in Bewegung.',
+  },
 ];
 
 export function getCategory(id: CategoryId): Category {

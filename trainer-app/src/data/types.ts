@@ -1,4 +1,12 @@
-export type CategoryId = 'aufwaermen' | 'hand-auge' | 'fuss-auge' | 'schnelligkeit' | 'gleichgewicht' | 'kraft';
+export type CategoryId =
+  | 'aufwaermen'
+  | 'hand-auge'
+  | 'fuss-auge'
+  | 'schnelligkeit'
+  | 'gleichgewicht'
+  | 'kraft'
+  | 'innere-staerke'
+  | 'hilfe-holen';
 
 export type AgeGroup = '4-6' | '7-9' | '10-12';
 

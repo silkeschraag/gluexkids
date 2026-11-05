@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 import { Button, Card, Chip } from '../../components/ui';
-import { getCategory } from '../../data/categories';
+import { CATEGORIES, getCategory } from '../../data/categories';
 import { AGE_GROUPS } from '../../data/types';
 import { shareSessionPdf, printSession } from '../../lib/pdf';
 import {
@@ -20,7 +20,7 @@ import { useSession } from '../../lib/session';
 import { colors, font, radius, spacing } from '../../theme';
 
 const DURATIONS = [30, 45, 60, 90];
-const FOCUS_OPTIONS: FocusCategory[] = ['hand-auge', 'fuss-auge', 'schnelligkeit', 'gleichgewicht', 'kraft'];
+const FOCUS_OPTIONS = CATEGORIES.map((c) => c.id).filter((id): id is FocusCategory => id !== 'aufwaermen');
 const PHASES: PlanPhase[] = ['aufwaermen', 'hauptteil', 'abschluss'];
 const PHASE_COLORS: Record<PlanPhase, string> = {
   aufwaermen: colors.orange,

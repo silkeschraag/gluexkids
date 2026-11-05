@@ -14,6 +14,8 @@ export const colors = {
   yellow: '#FBAC05',
   yellowLight: '#FDC54A',
   red: '#E2401E',
+  purple: '#7B4FC9',
+  teal: '#12988F',
   white: '#FFFFFF',
 };
 
