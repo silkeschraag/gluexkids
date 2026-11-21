@@ -237,6 +237,10 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 .spot-img { margin: 0 -22px 20px; aspect-ratio: 16 / 10; background: center 28% / cover; }
 .spotlight.has-img::after { display: none; }
 
+/* figuren der glüxbande */
+.thumb.fig { background-color: var(--honey-soft) !important; background-size: auto 84% !important; background-repeat: no-repeat; background-position: center 70% !important; }
+.d-fig { width: 120px; height: auto; margin: 0 0 14px -6px; }
+
 /* über mich: siegel & bande */
 .badge-row { display: flex; gap: 16px; align-items: center; margin: 26px 0 0; padding: 16px; border-radius: var(--r-md); background: var(--cream); border: 1px solid var(--sand); }
 .badge-row img { width: 84px; height: auto; flex: none; }

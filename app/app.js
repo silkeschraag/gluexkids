@@ -83,7 +83,9 @@
   }
 
   /* ------------------------------------------------------- components */
-  const thumb = (f, cls) => f.bild
+  const thumb = (f, cls) => f.figur
+    ? `<div class="thumb fig" style="background-image:url('img/bande/${esc(f.figur)}.webp')" role="img" aria-label=""></div>`
+    : f.bild
     ? `<div class="thumb" style="background-image:url('${esc(f.bild)}')" role="img" aria-label=""></div>`
     : `<div class="thumb t-${f.typ}">${icon(TYPES[f.typ].icon)}</div>`;
   const doneMark = (f) => store.done[f.id] ? `<span class="done-mark" title="Ausprobiert">${icon('check')}</span>` : '';
@@ -247,7 +249,7 @@
         </div>
         <div class="list">
           ${items.length ? items.map(freebieCard).join('')
-            : `<div class="empty"><img src="img/fox.png" alt="">${filter === 'gemerkt' ? 'Noch nichts gemerkt. Tippe bei einem Freebie auf „Merken“.' : 'Hier kommt bald etwas Neues.'}</div>`}
+            : `<div class="empty"><img src="img/bande/foxy.webp" alt="">${filter === 'gemerkt' ? 'Noch nichts gemerkt. Tippe bei einem Freebie auf „Merken“.' : 'Hier kommt bald etwas Neues.'}</div>`}
         </div>`;
     },
 
@@ -261,7 +263,7 @@
       return `
         ${f.bild && !isDownload ? `<div class="cover" style="background-image:url('${esc(f.bild)}')"></div>` : ''}
         <section class="d-head">
-          ${f.bild && !isDownload ? '' : `<div class="ic t-${f.typ}">${icon(t.icon)}</div>`}
+          ${f.figur ? `<img class="d-fig" src="img/bande/${esc(f.figur)}.webp" alt="">` : f.bild && !isDownload ? '' : `<div class="ic t-${f.typ}">${icon(t.icon)}</div>`}
           <span class="kicker accent">${t.label} · ${esc(f.thema)}</span>
           <h1>${esc(f.titel)}</h1>
           ${metaRow(f)}
@@ -373,10 +375,10 @@
           <div>${icon('cap')} Staatlich geprüfter Stresscoach</div>
         </div>
         <section class="bande">
-          <img src="img/glueckbande.webp" alt="Die GlüXkids-Bande: Foxy, Leo, Paul, Fina, Samy, Taffi und Clara" loading="lazy">
+          <img src="img/glueckbande.webp" alt="Die GlüXkids-Bande mit Foxy und seinen Freunden" loading="lazy">
           <span class="kicker accent">Die GlüXbande</span>
           <h2>Foxy und seine <em>Freunde</em></h2>
-          <p>In der App begleitet dich <strong>Foxy, der Fuchs</strong>. Ab und zu schauen auch seine Freunde vorbei: Leo, Paul, Fina, Samy, Taffi und Clara. Gemeinsam zeigen sie: Jedes Kind ist auf seine Weise stark.</p>
+          <p>In der App begleitet dich <strong>Foxy, der Fuchs</strong>. Ab und zu schauen auch seine Freunde vorbei: Lio, PinguPik, Fina, Samy, Taffi und Elli. Gemeinsam zeigen sie: Jedes Kind ist auf seine Weise stark.</p>
         </section>
         <div class="links">
           <a class="card" href="${esc(s.webseite)}" target="_blank" rel="noopener">${icon('globe')} gluexkids.de – Kurse vor Ort ${icon('external')}</a>
@@ -493,7 +495,7 @@
   }
 
   function notFound() {
-    return `<div class="empty"><img src="img/fox.png" alt=""><h2>Hoppla!</h2><p>Diese Seite gibt es (noch) nicht.</p><a class="btn btn-primary" href="#/">Zur Startseite</a></div>`;
+    return `<div class="empty"><img src="img/bande/foxy.webp" alt=""><h2>Hoppla!</h2><p>Diese Seite gibt es (noch) nicht.</p><a class="btn btn-primary" href="#/">Zur Startseite</a></div>`;
   }
 
   /* ------------------------------------------------------------- router */

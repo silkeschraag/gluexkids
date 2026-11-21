@@ -79,6 +79,7 @@ window.GLUX_CONTENT = {
           "serie"    = Übungsserie: mehrere Übungen zum Durchwischen (uebungen: [...])
      neu: true = bekommt das Etikett „Neu“ und steht auf der Startseite vorn
      bild:  optionales Titelbild (Datei in img/)
+     figur: optional eine Figur der GlüXbande als Bild (foxy, lio, pingupik, fina, samy, elli)
      alter: Altersangabe als Text
      dauer: z. B. "5 Min."                                                    */
   freebies: [
@@ -230,6 +231,7 @@ window.GLUX_CONTENT = {
       id: "fuchs-power-pose",
       typ: "uebung",
       titel: "Foxys Power-Pose",
+      figur: "foxy",
       kurz: "In 2 Minuten mutiger: Körperhaltung, die Selbstvertrauen schenkt.",
       alter: "4–12 Jahre",
       dauer: "2 Min.",
@@ -267,6 +269,7 @@ window.GLUX_CONTENT = {
       id: "atmen-mit-fina",
       typ: "uebung",
       titel: "Atmen mit Fina",
+      figur: "fina",
       kurz: "Eine Beruhigungsübung für Wut, Aufregung und schlechte Tage.",
       alter: "4–10 Jahre",
       dauer: "3 Min.",

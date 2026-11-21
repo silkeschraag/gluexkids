@@ -6,8 +6,10 @@ Eltern werden geduzt.
 ## Marke
 - Das ist eine **GlüXkids-App** – keine TaffeTiger-App.
 - **Hauptfigur ist Foxy, der Fuchs** (orange, grüner Hoodie). Die **GlüXbande** darf dezent
-  auftauchen, aber nicht im Fokus stehen: Foxy (Fuchs), Leo (Löwe), Paul (Pinguin), Fina (Faultier),
-  Samy (Schildkröte), Taffi (Tiger), Clara (Chamäleon). Bild: `app/img/glueckbande.webp`.
+  auftauchen, aber nicht im Fokus stehen: Foxy (Fuchs), Lio (Löwe), PinguPik (Pinguin),
+  Fina (Faultier), Samy (Schildkröte), Taffi (Tiger), Elli (Elefant). Clara (Chamäleon) gibt es nicht mehr.
+  Einzelbilder (freigestellt): `app/img/bande/<name>.webp`. Gruppenbild: `app/img/glueckbande.webp`
+  (noch die alte Version mit Clara – wird ersetzt, sobald Silke das neue Gruppenbild schickt).
 - **TaffeTiger®** nur als Werbung/Hinweis bzw. als Silkes Qualifikation erwähnen – nicht
   in Übungsnamen, Figuren, Logo oder Bildsprache der App.
 - Hauptlogo: `app/img/logo.png` (GlüXkids, „Bewegung • Mindset • Stärke“).
