@@ -3,6 +3,14 @@
 Projekt von Silke Schraag (GlüXkids, gluexkids.de). Sprache für alle Inhalte: Deutsch,
 Eltern werden geduzt.
 
+## Arbeitsweise – IMMER ZUERST FRAGEN
+- **Bevor Inhalte in die App kommen, Silke immer zuerst fragen.** Das gilt für neue oder
+  selbst formulierte Übungen, Texte, Impulse, Kursbeschreibungen und jede inhaltliche Änderung.
+- Ablauf: Entwurf im Chat zeigen → fragen, ob Übungen und Text so passen oder ob sie etwas
+  ändern möchte → **erst nach ihrem Okay** in `app/content.js` bzw. die App einfügen.
+- Auch bei eigenen Ideen (z. B. zusätzliche Übungen, neue Formulierungen) nichts eigenmächtig
+  einbauen, sondern als Vorschlag zur Freigabe vorlegen.
+
 ## Marke
 - Das ist eine **GlüXkids-App** – keine TaffeTiger-App.
 - **Hauptfigur ist Foxy, der Fuchs** (orange, grüner Hoodie). Die **GlüXbande** darf dezent
