@@ -153,7 +153,7 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 .fcard { display: grid; grid-template-columns: 76px 1fr; gap: 16px; padding: 14px; text-decoration: none; align-items: center; position: relative; }
 .fcard .thumb { width: 76px; height: 76px; border-radius: 14px; background: var(--sand) center/cover; display: flex; align-items: center; justify-content: center;
   color: var(--ink-soft); font-size: 28px; }
-.fcard .thumb.t-uebung { background-color: var(--accent-soft); color: var(--accent-deep); }
+.fcard .thumb.t-serie, .fcard .thumb.t-uebung { background-color: var(--accent-soft); color: var(--accent-deep); }
 .fcard .thumb.t-alltag { background-color: var(--sage-soft); color: #5E6C3E; }
 .fcard .thumb.t-download { background-color: var(--honey-soft); color: #8F6A22; }
 .fcard .type { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
@@ -168,7 +168,7 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 .vcard .thumb { aspect-ratio: 5 / 4; background: var(--sand) center/cover; display: flex; align-items: center; justify-content: center; font-size: 26px; }
 .vcard .thumb[class*="t-"] .svg { width: 64px; height: 64px; padding: 19px; border-radius: 50%; background: var(--cream);
   box-shadow: 0 0 0 10px color-mix(in srgb, var(--cream) 45%, transparent); }
-.vcard .thumb.t-uebung { background-color: var(--accent-soft); color: var(--accent-deep); }
+.vcard .thumb.t-serie, .vcard .thumb.t-uebung { background-color: var(--accent-soft); color: var(--accent-deep); }
 .vcard .thumb.t-alltag { background-color: var(--sage-soft); color: #5E6C3E; }
 .vcard .thumb.t-download { background-color: var(--honey-soft); color: #8F6A22; }
 .vcard .thumb .svg { stroke-width: 1.6; }
@@ -219,6 +219,63 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 
 .actions { display: grid; gap: 10px; margin-top: 28px; }
 .actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* spotlight: neues Freebie auf der Startseite */
+.spotlight { display: block; position: relative; overflow: hidden; margin-top: 24px; padding: 24px 22px 22px; border-radius: var(--r-lg);
+  background: var(--ink); color: var(--cream); text-decoration: none; box-shadow: var(--sh-lift); }
+.spotlight::after { content: ''; position: absolute; width: 220px; height: 220px; right: -90px; top: -90px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,98,45,.45), transparent 70%); }
+.spotlight > * { position: relative; z-index: 1; }
+.spot-ic { width: 46px; height: 46px; border-radius: 50%; background: rgba(252,250,246,.1); color: #E9A77E;
+  display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.spotlight .kicker { color: #E9A77E; }
+.spotlight h3 { font-size: 27px; margin: 6px 0 8px; color: var(--cream); }
+.spotlight p { font-size: 15px; color: color-mix(in srgb, var(--cream) 78%, transparent); margin: 0 0 18px; }
+.spotlight .btn { padding: 12px 20px; font-size: 14.5px; }
+
+/* ------------------------------------------------------- übungsserie */
+.type .badge-new, .kicker .badge-new { margin-left: 6px; vertical-align: 1px; }
+.hinweise { margin: 22px 0 6px; padding: 20px; border-radius: var(--r-md); background: var(--cream); border: 1px solid var(--sand); }
+.hinweise .kicker { margin-bottom: 6px; }
+.hinweise .checklist { border-top: 0; }
+.hinweise .checklist li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.deck-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 34px 0 10px; }
+.deck-progress { font-size: 13.5px; color: var(--ink-mute); font-weight: 600; white-space: nowrap; }
+.deck-progress b { color: var(--ink); font-weight: 800; }
+.progress-bar { height: 4px; border-radius: 4px; background: var(--sand); overflow: hidden; margin-bottom: 10px; }
+.progress-bar span { display: block; height: 100%; background: var(--sage); border-radius: 4px; transition: width .4s ease; }
+
+.deck { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 20px;
+  margin: 0 -20px; padding: 4px 20px 16px; scrollbar-width: none; overscroll-behavior-x: contain; align-items: flex-start; }
+.deck::-webkit-scrollbar { display: none; }
+.ex { flex: 0 0 88%; scroll-snap-align: start; scroll-snap-stop: always; padding: 22px 20px 20px;
+  display: flex; flex-direction: column; transition: border-color .3s; }
+.ex.is-done { border-color: color-mix(in srgb, var(--sage) 45%, var(--sand)); }
+.ex-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.ex-num { font-family: var(--serif); font-size: 40px; line-height: 1; color: var(--accent); font-weight: 400; }
+.ex.is-done .ex-num { color: var(--sage); }
+.ex-of { font-size: 13px; color: var(--ink-mute); font-weight: 600; }
+.ex h3 { font-size: 23px; margin: 6px 0 10px; }
+.ex .meta { margin-bottom: 16px; }
+.ex-steps { margin: 0 0 16px; padding: 0; list-style: none; counter-reset: st; display: grid; gap: 10px; }
+.ex-steps li { counter-increment: st; display: grid; grid-template-columns: 24px 1fr; gap: 10px; font-size: 15.5px; line-height: 1.55; }
+.ex-steps li::before { content: counter(st); font-family: var(--serif); font-size: 15px; color: var(--ink-mute);
+  width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--sand-deep); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.ex-plus { padding: 14px 16px; border-radius: var(--r-sm); background: var(--accent-soft); margin-bottom: 14px; }
+.ex-plus .kicker { color: var(--accent-deep); display: block; margin-bottom: 3px; font-size: 10.5px; }
+.ex-plus p { margin: 0; font-size: 14.5px; line-height: 1.5; }
+.ex-why { font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin: 0 0 18px; }
+.ex-why .kicker { display: block; margin-bottom: 3px; font-size: 10.5px; }
+.ex .btn { margin-top: 4px; }
+
+.deck-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; }
+.deck-nav .icon-btn:disabled { opacity: .35; cursor: default; }
+.dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.dot-btn { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--sand-deep); cursor: pointer; transition: .2s; }
+.dot-btn.done { background: var(--sage); }
+.dot-btn.active { width: 22px; border-radius: 4px; background: var(--ink); }
+.dot-btn.done.active { background: var(--sage); }
 
 /* ------------------------------------------------------------------ kurse */
 .kcard { padding: 20px; text-decoration: none; display: block; }

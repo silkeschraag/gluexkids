@@ -11,7 +11,9 @@ und funktioniert auch offline.
 
 | Was | Wie |
 |---|---|
-| Neues Freebie | Eintrag in `freebies` kopieren und anpassen. Typen: `uebung`, `alltag`, `download` |
+| Neues Freebie | Eintrag in `freebies` kopieren und anpassen. Typen: `uebung`, `alltag`, `download`, `serie` |
+| Übungsserie | `typ: "serie"` mit einer Liste `uebungen` – jede Übung wird eine Karte zum Durchwischen (Vorlage: „Koordination für zu Hause“) |
+| Hervorheben | `neu: true` – Etikett „Neu“ und großer Hinweis oben auf der Startseite |
 | Download-Datei | Datei (PDF/PNG) in `downloads/` legen, bei `datei:` eintragen |
 | Titelbild | Bild in `img/` legen, bei `bild:` eintragen |
 | Wochenimpuls | Eintrag in `impulse` – erscheint automatisch ab `datum`, du kannst also vorplanen |

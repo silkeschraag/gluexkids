@@ -76,10 +76,155 @@ window.GLUX_CONTENT = {
      typ: "uebung"   = Übung zum gemeinsamen Machen
           "alltag"   = Transferaufgabe für den Alltag
           "download" = Datei zum Herunterladen/Ausdrucken (datei: "downloads/...")
+          "serie"    = Übungsserie: mehrere Übungen zum Durchwischen (uebungen: [...])
+     neu: true = bekommt das Etikett „Neu“ und steht auf der Startseite vorn
      bild:  optionales Titelbild (Datei in img/)
      alter: Altersangabe als Text
      dauer: z. B. "5 Min."                                                    */
   freebies: [
+    {
+      id: "koordination-zuhause",
+      typ: "serie",
+      neu: true,
+      titel: "Koordination für zu Hause",
+      kurz: "10 kleine Bewegungsspiele für Wohnzimmer und Kinderzimmer – ohne Turnhalle, mit Material, das ihr schon habt.",
+      alter: "4–10 Jahre",
+      dauer: "je 2–5 Min.",
+      thema: "Koordination",
+      intro: [
+        "Koordination ist viel mehr als Geschicklichkeit. Wenn Kinder balancieren, fangen oder Arme und Beine überkreuz bewegen, müssen Körper und Kopf eng zusammenarbeiten. Genau das stärkt Konzentration, Körpergefühl – und das Vertrauen in sich selbst: **Ich kann das!**",
+        "Bei GlüXkids steht Koordination deshalb immer am Anfang. Diese 10 Übungen könnt ihr ganz einfach zu Hause machen. Ihr braucht keine Turnhalle, nur ein bisschen Platz und Lust auf Bewegung."
+      ],
+      hinweise: [
+        "Lieber jeden Tag 5 Minuten als einmal pro Woche eine Stunde.",
+        "Macht mit! Kinder lieben es, wenn Eltern auch mal wackeln.",
+        "Fehler sind erwünscht – Lachen gehört dazu.",
+        "Sucht euch 2–3 Lieblingsübungen aus und steigert sie nach und nach."
+      ],
+      uebungen: [
+        {
+          titel: "Der Überkreuz-Marsch",
+          dauer: "2 Min.",
+          material: "nichts",
+          schritte: [
+            "Marschiert auf der Stelle und hebt die Knie schön hoch.",
+            "Jetzt berührt der rechte Ellenbogen das linke Knie, dann der linke Ellenbogen das rechte Knie.",
+            "Findet einen gleichmäßigen Rhythmus – gern zu Musik."
+          ],
+          steigerung: "Statt Ellenbogen tippt die Hand an die gegenüberliegende Ferse – mal vorn, mal hinter dem Körper.",
+          warum: "Überkreuzbewegungen fordern die Zusammenarbeit beider Körperseiten."
+        },
+        {
+          titel: "Der Flamingo",
+          dauer: "2 Min.",
+          material: "nichts",
+          schritte: [
+            "Stellt euch auf ein Bein, das andere Bein ist angewinkelt wie beim Flamingo.",
+            "Die Arme breitet ihr aus wie Flügel. Zählt gemeinsam laut bis 10.",
+            "Dann das Bein wechseln."
+          ],
+          steigerung: "Augen zu! Oder auf einem Sofakissen stehen – das wackelt richtig.",
+          warum: "Der Einbeinstand trainiert das Gleichgewicht und die Körperspannung."
+        },
+        {
+          titel: "Der Luftballon darf nicht landen",
+          dauer: "3–5 Min.",
+          material: "1 Luftballon",
+          schritte: [
+            "Pustet einen Luftballon auf.",
+            "Spielt ihn euch gegenseitig zu – er darf den Boden nicht berühren.",
+            "Zählt mit: Wie viele Berührungen schafft ihr gemeinsam?"
+          ],
+          steigerung: "Nur mit dem Kopf, den Knien oder dem Fuß spielen. Oder: Jeder darf nur die schwächere Hand nehmen.",
+          warum: "Kinder lernen, Flugbahnen einzuschätzen und schnell zu reagieren – ganz ohne Angst vor einem harten Ball."
+        },
+        {
+          titel: "Der Seiltänzer",
+          dauer: "3 Min.",
+          material: "Schnur, Wollfaden oder Malerkrepp",
+          schritte: [
+            "Legt eine Schnur in einer langen Linie auf den Boden oder klebt einen Streifen Krepp.",
+            "Euer Kind balanciert wie im Zirkus darüber – Fuß vor Fuß, die Arme zur Seite.",
+            "Am Ende gibt es eine große Verbeugung und Applaus."
+          ],
+          steigerung: "Rückwärts gehen, ein Kuscheltier auf dem Kopf tragen oder die Schnur in Kurven legen.",
+          warum: "Balancieren schult Gleichgewicht, Konzentration und genaues Hinschauen."
+        },
+        {
+          titel: "Socken-Jonglage",
+          dauer: "3 Min.",
+          material: "2 Paar zusammengerollte Socken",
+          schritte: [
+            "Rollt Socken zu kleinen Bällen.",
+            "Euer Kind wirft einen Sockenball hoch und fängt ihn mit beiden Händen.",
+            "Klappt das gut? Dann vor dem Fangen einmal in die Hände klatschen."
+          ],
+          steigerung: "Zweimal klatschen, mit einer Hand fangen oder zwei Sockenbälle abwechselnd werfen.",
+          warum: "Werfen und Fangen verbinden Sehen und Bewegen – die Auge-Hand-Koordination."
+        },
+        {
+          titel: "Das Spiegelspiel",
+          dauer: "3 Min.",
+          material: "nichts",
+          schritte: [
+            "Stellt euch gegenüber. Einer ist die Person, der andere das Spiegelbild.",
+            "Bewegt euch langsam: Arme heben, auf die Zehenspitzen gehen, Grimassen schneiden. Das Spiegelbild macht alles genau nach.",
+            "Nach einer Minute wird getauscht."
+          ],
+          steigerung: "Schneller werden – oder ganz langsam wie in Zeitlupe.",
+          warum: "Nachahmen fördert Körperwahrnehmung, Aufmerksamkeit und ganz nebenbei die Verbindung zwischen euch."
+        },
+        {
+          titel: "Nase – Ohr – Wechsel",
+          dauer: "2 Min.",
+          material: "nichts",
+          schritte: [
+            "Die rechte Hand fasst an die Nase, die linke Hand an das rechte Ohr.",
+            "Einmal in die Hände klatschen und schnell wechseln: linke Hand an die Nase, rechte Hand ans linke Ohr.",
+            "Erst langsam, dann immer schneller."
+          ],
+          steigerung: "Mit geschlossenen Augen – oder nach jedem Wechsel zweimal klatschen.",
+          warum: "Die Übung bringt Kopf und Hände zum Lachen und Knobeln zugleich – Konzentration pur."
+        },
+        {
+          titel: "Inselhüpfen",
+          dauer: "3–5 Min.",
+          material: "Sofakissen oder Handtücher",
+          schritte: [
+            "Verteilt Kissen oder Handtücher als Inseln auf dem Boden – der Boden ist das Meer.",
+            "Euer Kind hüpft von Insel zu Insel, ohne ins Wasser zu fallen.",
+            "Auf jeder Insel einmal kurz stehen bleiben und das Gleichgewicht halten."
+          ],
+          steigerung: "Nur auf einem Bein hüpfen, die Inseln weiter auseinanderlegen oder rückwärts hüpfen.",
+          warum: "Springen und sicher landen stärkt Beinkraft, Gleichgewicht und Mut."
+        },
+        {
+          titel: "Klatsch – Patsch – Schnips",
+          dauer: "2 Min.",
+          material: "nichts",
+          schritte: [
+            "Du machst einen kurzen Rhythmus vor: zweimal auf die Oberschenkel patschen, einmal klatschen.",
+            "Dein Kind macht ihn nach.",
+            "Mit jeder Runde wird der Rhythmus ein bisschen länger."
+          ],
+          steigerung: "Schnipsen oder Stampfen einbauen – oder dein Kind denkt sich einen Rhythmus für dich aus.",
+          warum: "Rhythmus fördert Merkfähigkeit, Zuhören und das Timing von Bewegungen."
+        },
+        {
+          titel: "Der Tiger-Parcours",
+          dauer: "5 Min.",
+          material: "Stühle, Kissen, Decke",
+          schritte: [
+            "Baut gemeinsam einen kleinen Parcours: unter dem Tisch durchkriechen, über ein Kissen steigen, durch einen Deckentunnel krabbeln.",
+            "Euer Kind schleicht wie ein Tiger hindurch – leise und geschmeidig.",
+            "Danach baut euer Kind einen Parcours für dich!"
+          ],
+          steigerung: "Mit Stoppuhr auf Zeit oder mit einem Sockenball, der unterwegs nicht runterfallen darf.",
+          warum: "Klettern, Kriechen und Krabbeln verbinden viele Bewegungsformen – und das Selberbauen macht stolz."
+        }
+      ],
+      tipp: "Macht aus den Übungen eine kleine Morgen- oder Abendroutine: Jeden Tag zieht euer Kind eine Übung – und am Wochenende gibt es den großen Tiger-Parcours."
+    },
     {
       id: "tiger-power-pose",
       typ: "uebung",

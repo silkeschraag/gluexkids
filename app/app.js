@@ -38,6 +38,9 @@
     x: '<path d="M18 6 6 18M6 6l12 12"/>'
   };
   ICONS['heart-handshake'] = ICONS.heart;
+  ICONS.move = '<circle cx="13" cy="4" r="2"/><path d="m7 21 3-6 3 2v5"/><path d="m5 11 3-3 4 1 3 3 3 1"/><path d="m10 15 2-6"/>';
+  ICONS.box = '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>';
+  ICONS.prev = '<path d="m15 18-6-6 6-6"/>';
   const icon = (n) => `<svg class="svg" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ICONS.heart}</svg>`;
 
   /* ----------------------------------------------------------- helpers */
@@ -47,6 +50,7 @@
   const fmtDate = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 
   const TYPES = {
+    serie:    { label: 'Übungsserie',  plural: 'Serien',    icon: 'move',     farbe: 'orange' },
     uebung:   { label: 'Übung',        plural: 'Übungen',   icon: 'zap',      farbe: 'orange' },
     alltag:   { label: 'Für den Alltag', plural: 'Alltag',  icon: 'sun',      farbe: 'green' },
     download: { label: 'Download',     plural: 'Downloads', icon: 'download', farbe: 'blue' }
@@ -54,7 +58,7 @@
 
   /* ------------------------------------------------- local storage (safe) */
   const KEY = 'gluexkids-app-v1';
-  let store = { done: {}, fav: {}, steps: {}, notes: {}, waitlist: {}, seenImpuls: '', installDismissed: false };
+  let store = { done: {}, fav: {}, steps: {}, ex: {}, pos: {}, notes: {}, waitlist: {}, seenImpuls: '', installDismissed: false };
   try { Object.assign(store, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { /* privat-modus o.ä. */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* ignorieren */ } };
 
@@ -83,13 +87,15 @@
     ? `<div class="thumb" style="background-image:url('${esc(f.bild)}')" role="img" aria-label=""></div>`
     : `<div class="thumb t-${f.typ}">${icon(TYPES[f.typ].icon)}</div>`;
   const doneMark = (f) => store.done[f.id] ? `<span class="done-mark" title="Ausprobiert">${icon('check')}</span>` : '';
-  const metaRow = (f) => `<div class="meta"><span>${icon('user')} ${esc(f.alter)}</span><span>${icon('clock')} ${esc(f.dauer)}</span></div>`;
+  const metaRow = (f) => `<div class="meta"><span>${icon('user')} ${esc(f.alter)}</span>${f.uebungen
+    ? `<span>${icon('move')} ${f.uebungen.length} Übungen</span>` : `<span>${icon('clock')} ${esc(f.dauer)}</span>`}</div>`;
+  const typeLabel = (f) => `${TYPES[f.typ].label}${f.neu && !store.done[f.id] ? ' <span class="badge-new">Neu</span>' : ''}`;
 
   function freebieCard(f) {
     return `<a class="card fcard" href="#/freebie/${esc(f.id)}">
       ${thumb(f)}
       <div class="body">
-        <div class="type">${TYPES[f.typ].label}</div>
+        <div class="type">${typeLabel(f)}</div>
         <h3>${esc(f.titel)}</h3>
         ${metaRow(f)}
       </div>
@@ -101,7 +107,7 @@
     return `<a class="card vcard" href="#/freebie/${esc(f.id)}">
       ${thumb(f)}
       <div class="body">
-        <div class="kicker">${TYPES[f.typ].label}</div>
+        <div class="kicker">${typeLabel(f)}</div>
         <h3>${esc(f.titel)}</h3>
         ${metaRow(f)}
       </div>
@@ -197,11 +203,19 @@
         </section>
         ${installBanner()}
 
+        ${C.freebies.filter((f) => f.neu).slice(0, 1).map((f) => `<a class="spotlight" href="#/freebie/${esc(f.id)}">
+          <div class="spot-ic">${icon(TYPES[f.typ].icon)}</div>
+          <span class="kicker">Neu · Gratis für dich</span>
+          <h3>${esc(f.titel)}</h3>
+          <p>${esc(f.kurz)}</p>
+          <span class="btn btn-light">${store.ex[f.id] && store.ex[f.id].length ? 'Weitermachen' : 'Jetzt starten'} ${icon('arrow')}</span>
+        </a>`).join('')}
+
         ${l ? impulsFeature(l, hasNewImpuls()) : ''}
 
         <section class="section">
           <div class="section-head"><h2>Gratis für dich</h2><a href="#/freebies">Alle ansehen</a></div>
-          <div class="hscroll">${C.freebies.map(freebieTile).join('')}</div>
+          <div class="hscroll">${C.freebies.slice().sort((a, b) => (b.neu ? 1 : 0) - (a.neu ? 1 : 0)).map(freebieTile).join('')}</div>
         </section>
 
         <section class="quote">
@@ -222,7 +236,7 @@
       const chips = [['alle', 'Alle'], ['uebung', 'Übungen'], ['alltag', 'Für den Alltag'], ['download', 'Downloads'], ['gemerkt', 'Gemerkt']];
       let items = C.freebies;
       if (filter === 'gemerkt') items = items.filter((f) => store.fav[f.id]);
-      else if (filter !== 'alle') items = items.filter((f) => f.typ === filter);
+      else if (filter !== 'alle') items = items.filter((f) => f.typ === filter || (filter === 'uebung' && f.typ === 'serie'));
       const doneCount = C.freebies.filter((f) => store.done[f.id]).length;
       return `
         <span class="kicker accent">Kostenlos</span>
@@ -240,6 +254,7 @@
     freebie(params) {
       const f = freebie(params.id);
       if (!f) return notFound();
+      if (f.typ === 'serie') return serieView(f);
       const t = TYPES[f.typ];
       const checked = store.steps[f.id] || [];
       const isDownload = !!f.datei;
@@ -364,6 +379,103 @@
     }
   };
 
+  function serieView(f) {
+    const done = store.ex[f.id] || [];
+    const n = f.uebungen.length;
+    const pad = (i) => String(i + 1).padStart(2, '0');
+    return `
+      <section class="d-head">
+        <div class="ic">${icon('move')}</div>
+        <span class="kicker accent">Übungsserie · ${esc(f.thema)}</span>
+        <h1>${esc(f.titel)}</h1>
+        <div class="meta"><span>${icon('user')} ${esc(f.alter)}</span><span>${icon('move')} ${n} Übungen</span><span>${icon('clock')} ${esc(f.dauer)}</span></div>
+      </section>
+      <div class="prose">${[].concat(f.intro).map((p) => `<p>${rich(p)}</p>`).join('')}</div>
+      ${f.hinweise ? `<div class="hinweise"><span class="kicker">So klappt's am besten</span>
+        <ul class="checklist">${f.hinweise.map((h) => `<li>${icon('check')}<span>${rich(h)}</span></li>`).join('')}</ul></div>` : ''}
+
+      <div class="deck-head">
+        <h2 class="h-small" style="margin:0">Die Übungen</h2>
+        <span class="deck-progress" data-progress><b>${done.length}</b> von ${n} geschafft</span>
+      </div>
+      <div class="progress-bar"><span data-bar style="width:${(done.length / n) * 100}%"></span></div>
+      <p class="hint" style="margin:0 0 12px">Wische nach links für die nächste Übung.</p>
+
+      <div class="deck" data-deck="${esc(f.id)}">
+        ${f.uebungen.map((u, i) => `
+        <article class="card ex${done.includes(i) ? ' is-done' : ''}" data-ex="${i}" aria-label="Übung ${i + 1} von ${n}">
+          <div class="ex-top"><span class="ex-num">${pad(i)}</span><span class="ex-of">von ${n}</span></div>
+          <h3>${esc(u.titel)}</h3>
+          <div class="meta"><span>${icon('clock')} ${esc(u.dauer)}</span><span>${icon('box')} ${esc(u.material)}</span></div>
+          <ol class="ex-steps">${u.schritte.map((st) => `<li>${rich(st)}</li>`).join('')}</ol>
+          ${u.steigerung ? `<div class="ex-plus"><span class="kicker">Noch kniffliger</span><p>${rich(u.steigerung)}</p></div>` : ''}
+          ${u.warum ? `<p class="ex-why"><span class="kicker">Warum das hilft</span>${rich(u.warum)}</p>` : ''}
+          <button class="btn btn-block ${done.includes(i) ? 'btn-done' : 'btn-primary'}" data-ex-done="${i}">${icon('check')} ${done.includes(i) ? 'Geschafft' : 'Haben wir geschafft'}</button>
+        </article>`).join('')}
+      </div>
+      <div class="deck-nav">
+        <button class="icon-btn" data-deck-go="-1" aria-label="Vorherige Übung">${icon('prev')}</button>
+        <div class="dots">${f.uebungen.map((u, i) => `<button class="dot-btn${done.includes(i) ? ' done' : ''}" data-deck-to="${i}" aria-label="Übung ${i + 1}"></button>`).join('')}</div>
+        <button class="icon-btn" data-deck-go="1" aria-label="Nächste Übung">${icon('chevron')}</button>
+      </div>
+
+      ${f.tipp ? `<div class="tipp"><span class="kicker">${icon('bulb')} Silkes Tipp</span><p>${rich(f.tipp)}</p></div>` : ''}
+      <div class="actions">
+        <div class="actions-row">
+          <button class="btn btn-ghost" data-action="fav" data-id="${esc(f.id)}">${icon('bookmark')} ${store.fav[f.id] ? 'Gemerkt' : 'Merken'}</button>
+          <button class="btn btn-ghost" data-action="share" data-title="${esc(f.titel)}">${icon('share')} Teilen</button>
+        </div>
+      </div>
+      ${relatedKurs()}`;
+  }
+
+  /* Karten-Stapel: Position merken, Punkte aktualisieren */
+  function deckStep(deck) {
+    const cards = deck.children;
+    return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : deck.clientWidth;
+  }
+  function deckIndex(deck) { return Math.round(deck.scrollLeft / deckStep(deck)); }
+  function deckGo(deck, i, smooth) {
+    const max = deck.children.length - 1;
+    i = Math.max(0, Math.min(max, i));
+    deck.scrollTo({ left: i * deckStep(deck), behavior: smooth ? 'smooth' : 'auto' });
+  }
+  function initDeck() {
+    const deck = view.querySelector('[data-deck]');
+    if (!deck) return;
+    const id = deck.dataset.deck;
+    const dots = view.querySelectorAll('.dot-btn');
+    const mark = () => {
+      const i = deckIndex(deck);
+      dots.forEach((d, k) => d.classList.toggle('active', k === i));
+      view.querySelector('[data-deck-go="-1"]').disabled = i === 0;
+      view.querySelector('[data-deck-go="1"]').disabled = i === dots.length - 1;
+      return i;
+    };
+    let t;
+    deck.addEventListener('scroll', () => { const i = mark(); clearTimeout(t); t = setTimeout(() => { store.pos[id] = i; save(); }, 250); }, { passive: true });
+    requestAnimationFrame(() => { deckGo(deck, store.pos[id] || 0, false); mark(); });
+  }
+
+  function toggleExercise(btn) {
+    const card = btn.closest('.ex'); const deck = card.parentElement;
+    const id = deck.dataset.deck; const i = +btn.dataset.exDone;
+    const f = freebie(id); const n = f.uebungen.length;
+    const arr = store.ex[id] || [];
+    const nowDone = !arr.includes(i);
+    store.ex[id] = nowDone ? arr.concat(i) : arr.filter((x) => x !== i);
+    const count = store.ex[id].length;
+    card.classList.toggle('is-done', nowDone);
+    btn.className = `btn btn-block ${nowDone ? 'btn-done' : 'btn-primary'}`;
+    btn.innerHTML = `${icon('check')} ${nowDone ? 'Geschafft' : 'Haben wir geschafft'}`;
+    view.querySelector('[data-progress]').innerHTML = `<b>${count}</b> von ${n} geschafft`;
+    view.querySelector('[data-bar]').style.width = `${(count / n) * 100}%`;
+    view.querySelectorAll('.dot-btn')[i].classList.toggle('done', nowDone);
+    if (count === n && !store.done[id]) { store.done[id] = true; toast('Alle 10 Übungen geschafft – ihr seid richtige Tiger!'); }
+    else if (nowDone) { toast(`Übung ${i + 1} geschafft`); setTimeout(() => deckGo(deck, i + 1, true), 450); }
+    save();
+  }
+
   function relatedKurs() {
     const k = C.kurse[0];
     if (!k) return '';
@@ -412,6 +524,7 @@
     backBtn.hidden = !PARENT[r.name];
     backBtn.innerHTML = icon('back');
     updateTabs();
+    initDeck();
     const titles = { freebie: 'Freebie', impuls: 'Wochenimpuls', kurs: 'Kurs' };
     document.title = (titles[r.name] ? titles[r.name] + ' · ' : '') + 'GlüXkids – Die Eltern-App';
   }
@@ -427,6 +540,15 @@
   view.addEventListener('click', async (e) => {
     const chip = e.target.closest('[data-filter]');
     if (chip) { const f = chip.dataset.filter; history.replaceState(null, '', f === 'alle' ? '#/freebies' : `#/freebies?filter=${f}`); render(); return; }
+
+    const exBtn = e.target.closest('[data-ex-done]');
+    if (exBtn) { toggleExercise(exBtn); return; }
+    const go = e.target.closest('[data-deck-go], [data-deck-to]');
+    if (go) {
+      const deck = view.querySelector('[data-deck]');
+      deckGo(deck, go.dataset.deckTo != null ? +go.dataset.deckTo : deckIndex(deck) + +go.dataset.deckGo, true);
+      return;
+    }
 
     const step = e.target.closest('.steps li');
     if (step) {
