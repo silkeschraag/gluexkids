@@ -23,8 +23,14 @@ Eltern werden geduzt.
 - Keine Emojis in der Oberfläche.
 
 ## Inhalte
-- Freebies bevorzugt **direkt in der App** (Übungen, Übungsserien zum Wischen),
-  PDFs nur als zusätzlicher Download.
+- Freebies werden **nach Themen gebündelt** (z. B. Koordination, Mut & Selbstvertrauen,
+  Gefühle & innere Ruhe) – keine einzelnen Übungen als eigene Freebies. Jedes Thema ist eine
+  Serie mit Karten zum Durchwischen direkt in der App; PDFs nur als zusätzliche Druckversion.
+- Silkes Schwerpunkt ist: **Kinder stärken, Selbstvertrauen fördern, Mobbingprävention** –
+  Koordination/Bewegung ist ein Weg dorthin, nicht das Hauptthema.
+- „Tiefer einsteigen?“ = Kurswerbung, nur passend zum Thema (Feld `kurs`) und auf der Startseite.
+- Die Gesprächskarten „Erzähl doch mal“ sind ein **Verkaufsprodukt** – nicht als Freebie-Bild
+  verwenden; später mit Link zur Bestellseite.
 - Alle Inhalte in `app/content.js`; Anleitung in `app/README.md`.
 - Online-Kurse: „No-Brainer“ für 19 €, zunächst als „Bald verfügbar“ mit Warteliste.
 - Fachlich seriös bleiben: keine übertriebenen Wirkversprechen.

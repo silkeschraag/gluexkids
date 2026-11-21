@@ -73,15 +73,18 @@ window.GLUX_CONTENT = {
   ],
 
   /* ---------------------------------------------------------------- Freebies
-     typ: "uebung"   = Übung zum gemeinsamen Machen
-          "alltag"   = Transferaufgabe für den Alltag
-          "download" = Datei zum Herunterladen/Ausdrucken (datei: "downloads/...")
-          "serie"    = Übungsserie: mehrere Übungen zum Durchwischen (uebungen: [...])
-     neu: true = bekommt das Etikett „Neu“ und steht auf der Startseite vorn
-     bild:  optionales Titelbild (Datei in img/)
-     figur: optional eine Figur der GlüXbande als Bild (foxy, lio, pingupik, fina, samy, elli)
-     alter: Altersangabe als Text
-     dauer: z. B. "5 Min."                                                    */
+     Freebies sind nach THEMEN gebündelt. Jede Kategorie ist eine Serie mit
+     Karten zum Durchwischen (typ: "serie").
+
+     neu: true   = Etikett „Neu“ und großer Hinweis oben auf der Startseite
+     bild:       Titelbild der Kategorie (Datei in img/)
+     figur:      alternativ eine Figur der GlüXbande (foxy, lio, pingupik, fina, samy, elli)
+     datei:      optional Druckversion als PDF (Datei in downloads/)
+     kurs:       optional id eines passenden Kurses → „Tiefer einsteigen?“ unter der Kategorie
+
+     Jede Übung (Karte) kann enthalten:
+       titel, dauer, material, figur, intro, schritte, liste {titel, punkte},
+       datei + dateiText, steigerung, tipp, warum                              */
   freebies: [
     {
       id: "koordination-zuhause",
@@ -93,9 +96,10 @@ window.GLUX_CONTENT = {
       dauer: "je 2–5 Min.",
       thema: "Koordination",
       bild: "img/foxy-balance.webp",
+      kurs: "selbstbewusstsein-training",
       intro: [
         "Koordination ist viel mehr als Geschicklichkeit. Wenn Kinder balancieren, fangen oder Arme und Beine überkreuz bewegen, müssen Körper und Kopf eng zusammenarbeiten. Genau das stärkt Konzentration, Körpergefühl – und das Vertrauen in sich selbst: **Ich kann das!**",
-        "Bei GlüXkids steht Koordination deshalb immer am Anfang. Diese 10 Übungen könnt ihr ganz einfach zu Hause machen. Ihr braucht keine Turnhalle, nur ein bisschen Platz und Lust auf Bewegung."
+        "Bewegung ist bei GlüXkids einer der Wege zu mehr Selbstvertrauen. Diese 10 Übungen könnt ihr ganz einfach zu Hause machen. Ihr braucht keine Turnhalle, nur ein bisschen Platz und Lust auf Bewegung."
       ],
       hinweise: [
         "Lieber jeden Tag 5 Minuten als einmal pro Woche eine Stunde.",
@@ -228,119 +232,146 @@ window.GLUX_CONTENT = {
       tipp: "Macht aus den Übungen eine kleine Morgen- oder Abendroutine: Jeden Tag zieht euer Kind eine Übung – und am Wochenende gibt es Foxys großen Parcours."
     },
     {
-      id: "fuchs-power-pose",
-      typ: "uebung",
-      titel: "Foxys Power-Pose",
-      figur: "foxy",
-      kurz: "In 2 Minuten mutiger: Körperhaltung, die Selbstvertrauen schenkt.",
+      id: "mut-selbstvertrauen",
+      typ: "serie",
+      titel: "Mut & Selbstvertrauen",
+      kurz: "Kleine Übungen, mit denen dein Kind Haltung zeigt, Grenzen setzt und an sich glaubt.",
       alter: "4–12 Jahre",
-      dauer: "2 Min.",
-      thema: "Selbstbewusstsein",
-      intro: "Unsere Haltung beeinflusst, wie wir uns fühlen. Wer aufrecht steht, fühlt sich stärker – und wirkt auch so. Perfekt vor dem Kindergarten, der Schule oder einer Herausforderung.",
-      schritte: [
-        "Stellt euch gemeinsam hin, die Füße etwa schulterbreit auseinander.",
-        "Rücken gerade, Kopf hoch, Schultern locker nach hinten – so stolz wie Foxy.",
-        "Hände in die Hüften stemmen oder die Arme wie ein Sieger nach oben strecken.",
-        "Dreimal tief durch die Nase einatmen und laut ausatmen: „Ich bin stark!“",
-        "Noch 30 Sekunden so stehen bleiben und grinsen. Ja, das darf albern sein!"
-      ],
-      tipp: "Macht die Power-Pose zu eurem Morgenritual – zum Beispiel direkt nach dem Zähneputzen."
-    },
-    {
-      id: "stopp-hand",
-      typ: "uebung",
-      titel: "Die Stopp-Hand",
-      kurz: "Klare Grenzen setzen – mit Stimme, Haltung und Blick.",
-      alter: "5–12 Jahre",
-      dauer: "10 Min.",
-      thema: "Mobbingprävention",
+      dauer: "je 2–10 Min.",
+      thema: "Selbstvertrauen & Mobbingprävention",
       bild: "img/mutig.webp",
-      intro: "Ein selbstbewusstes „Stopp!“ ist eine der wirksamsten Strategien gegen Ärgern und Mobbing. Entscheidend ist nicht, was das Kind sagt, sondern wie es das sagt.",
-      schritte: [
-        "Erklärt die drei Zutaten: feste Stimme, gerader Stand, Blick in die Augen.",
-        "Dein Kind streckt eine Hand nach vorn, Handfläche zeigt zu dir – wie ein Stoppschild.",
-        "Es sagt laut und deutlich: „Stopp! Lass das!“ Nicht schreien, aber bestimmt.",
-        "Jetzt tauscht ihr: Du spielst einmal ein unsicheres, leises Stopp vor – woran merkt dein Kind den Unterschied?",
-        "Wiederholt das Ganze drei Mal und lobt konkret: „Deine Stimme war richtig kraftvoll!“"
+      kurs: "mobbing-basiswissen",
+      intro: [
+        "Selbstvertrauen ist der beste Schutz – auch gegen Ärgern und Mobbing. Kinder, die an sich glauben, treten anders auf: Sie stehen aufrechter, sprechen klarer und trauen sich, Nein zu sagen.",
+        "Das lässt sich üben. Mit diesen Übungen stärkst du dein Kind ganz nebenbei im Alltag – mit Körperhaltung, Stimme und starken Gedanken."
       ],
-      tipp: "Wichtig: Nach dem Stopp darf sich dein Kind immer umdrehen und weggehen – und sich Hilfe bei einem Erwachsenen holen. Das ist kein Petzen, sondern mutig."
+      hinweise: [
+        "Übt in entspannten Momenten, nicht direkt nach einem Streit.",
+        "Lob konkret: „Deine Stimme war richtig kraftvoll!“ wirkt mehr als „Gut gemacht“.",
+        "Mach selbst mit – du bist das wichtigste Vorbild."
+      ],
+      uebungen: [
+        {
+          titel: "Foxys Power-Pose",
+          figur: "foxy",
+          dauer: "2 Min.",
+          material: "nichts",
+          intro: "Unsere Haltung beeinflusst, wie wir uns fühlen. Wer aufrecht steht, fühlt sich stärker – und wirkt auch so.",
+          schritte: [
+            "Stellt euch gemeinsam hin, die Füße etwa schulterbreit auseinander.",
+            "Rücken gerade, Kopf hoch, Schultern locker nach hinten – so stolz wie Foxy.",
+            "Hände in die Hüften stemmen oder die Arme wie ein Sieger nach oben strecken.",
+            "Dreimal tief einatmen und beim Ausatmen sagen: „Ich bin stark!“"
+          ],
+          steigerung: "Erfindet eure eigene Power-Pose und gebt ihr einen Namen.",
+          tipp: "Macht die Power-Pose zum Morgenritual – zum Beispiel direkt nach dem Zähneputzen oder vor dem Losgehen."
+        },
+        {
+          titel: "Die Stopp-Hand",
+          dauer: "10 Min.",
+          material: "nichts",
+          intro: "Ein selbstbewusstes „Stopp!“ ist eine wichtige Strategie gegen Ärgern und Mobbing. Entscheidend ist nicht, was dein Kind sagt, sondern wie es das sagt.",
+          schritte: [
+            "Erklärt die drei Zutaten: feste Stimme, gerader Stand, Blick in die Augen.",
+            "Dein Kind streckt eine Hand nach vorn, die Handfläche zeigt zu dir – wie ein Stoppschild.",
+            "Es sagt laut und deutlich: „Stopp! Lass das!“ Nicht schreien, aber bestimmt.",
+            "Tauscht die Rollen: Du spielst einmal ein leises, unsicheres Stopp vor. Woran merkt dein Kind den Unterschied?"
+          ],
+          steigerung: "Übt das Stopp auch im Gehen oder im Sitzen – so, wie es auf dem Schulhof wirklich passiert.",
+          tipp: "Nach dem Stopp darf sich dein Kind immer umdrehen, weggehen und sich Hilfe bei einem Erwachsenen holen. Das ist kein Petzen, sondern mutig."
+        },
+        {
+          titel: "Finger-Affirmationen",
+          dauer: "1 Min. täglich",
+          material: "nur die eigene Hand",
+          intro: "Jede Fingerberührung ist ein Wort. So wird aus einer Hand ein ganzer Mutmach-Satz, den dein Kind immer dabeihat. Ein Beispiel:",
+          schritte: [
+            "Daumen und Zeigefinger berühren sich: **„Ich“**",
+            "Daumen und Mittelfinger: **„kann“**",
+            "Daumen und Ringfinger: **„das“**",
+            "Daumen und kleiner Finger: **„schaffen.“**",
+            "Langsam wiederholen und dabei mitsprechen – erst laut und gemeinsam, später ganz leise allein."
+          ],
+          liste: {
+            titel: "5 weitere Sätze als Idee",
+            punkte: [
+              "Ich werde das schaffen.",
+              "Ich bin gut genug.",
+              "Ich glaube an mich.",
+              "Ich bin heute mutig.",
+              "Ich bleibe ganz ruhig."
+            ]
+          },
+          datei: "downloads/finger-affirmationen.png",
+          dateiText: "Plakat zum Ausdrucken",
+          tipp: "Zeig deinem Kind, dass es die Finger-Affirmationen ganz unauffällig unter dem Tisch machen kann – zum Beispiel vor einer Klassenarbeit. Das ist sein kleines Geheimnis."
+        }
+      ],
+      tipp: "Sucht euch gemeinsam einen Lieblingssatz für die Woche aus und macht vor dem Losgehen kurz die Power-Pose dazu."
     },
     {
-      id: "atmen-mit-fina",
-      typ: "uebung",
-      titel: "Atmen mit Fina",
+      id: "gefuehle-ruhe",
+      typ: "serie",
+      titel: "Gefühle & innere Ruhe",
+      kurz: "Rituale und Übungen, die helfen, Gefühle zu verstehen und wieder ruhig zu werden.",
+      alter: "4–12 Jahre",
+      dauer: "je 3–5 Min.",
+      thema: "Gefühle & Resilienz",
       figur: "fina",
-      kurz: "Eine Beruhigungsübung für Wut, Aufregung und schlechte Tage.",
-      alter: "4–10 Jahre",
-      dauer: "3 Min.",
-      thema: "Gefühle",
-      intro: "Wenn Gefühle groß werden, hilft der Atem, wieder ruhig zu werden. Mit einem Bild im Kopf fällt das Kindern viel leichter.",
-      schritte: [
-        "Setzt euch bequem hin oder legt euch auf den Rücken.",
-        "Erzähl von Fina, dem Faultier aus der GlüXbande: Sie hat nie Eile und atmet ganz langsam. Dein Kind legt eine Hand auf den Bauch.",
-        "Langsam wie Fina durch die Nase einatmen und bis 4 zählen: Der Bauch wird groß und rund wie ein Ballon.",
-        "Kurz die Luft anhalten und bis 2 zählen.",
-        "Langsam durch den Mund ausatmen und bis 6 zählen: Der Ballon wird wieder klein.",
-        "Fünf Runden wiederholen. Danach fragen: „Wie fühlt sich dein Bauch jetzt an?“"
+      kurs: "selbstbewusster",
+      intro: [
+        "Starke Kinder haben nicht weniger Gefühle – sie lernen, mit ihnen umzugehen. Wer seine Gefühle benennen kann und weiß, wie er wieder ruhig wird, steht auch schwierige Situationen besser durch.",
+        "Diese kleinen Rituale passen in jeden Familienalltag: beim Abendessen, beim Zubettbringen oder immer dann, wenn es mal stürmisch wird."
       ],
-      tipp: "Übt das Fina-Atmen in ruhigen Momenten. Dann kann dein Kind es auch abrufen, wenn es wirklich aufgeregt ist."
-    },
-    {
-      id: "gefuehls-check",
-      typ: "alltag",
-      titel: "Der Gefühls-Check am Abendbrottisch",
-      kurz: "Ein kleines Ritual, das Gespräche über Gefühle ganz leicht macht.",
-      alter: "4–12 Jahre",
-      dauer: "jeden Abend",
-      thema: "Gefühle",
-      bild: "img/erzaehl-doch-mal.webp",
-      intro: "Auf „Wie war's in der Schule?“ kommt oft nur „Gut.“ Mit dem Gefühls-Check erfährst du viel mehr – ohne Verhör.",
-      schritte: [
-        "Jeder am Tisch zeigt mit der Hand, wie sein Tag war: Daumen hoch, Daumen zur Seite oder Daumen runter.",
-        "Reihum erzählt jede Person einen Moment, in dem sie sich heute gut gefühlt hat.",
-        "Wer mag, erzählt auch einen Moment, der doof war. Niemand muss.",
-        "Du fängst an – so lernt dein Kind, dass auch Erwachsene schwierige Momente haben.",
-        "Ganz wichtig: zuhören, nicht bewerten. Ein „Danke, dass du das erzählt hast“ reicht."
+      hinweise: [
+        "Gefühle sind nie falsch – auch Wut und Traurigkeit dürfen sein.",
+        "Zuhören ist wichtiger als Lösungen anbieten.",
+        "Kurze Rituale jeden Tag wirken mehr als lange Gespräche ab und zu."
       ],
-      tipp: "Haltet es kurz. Fünf Minuten am Tag sind wertvoller als ein langes Gespräch einmal im Monat."
-    },
-    {
-      id: "drei-gute-dinge",
-      typ: "alltag",
-      titel: "3 gute Dinge – das Glücks-Ritual",
-      kurz: "Den Blick aufs Gelingen lenken: jeden Abend vor dem Einschlafen.",
-      alter: "4–12 Jahre",
-      dauer: "5 Min.",
-      thema: "Resilienz",
-      intro: "Unser Gehirn merkt sich Negatives leichter als Positives. Wer jeden Tag bewusst auf das Gute schaut, stärkt seine innere Widerstandskraft – das ist gut erforscht.",
-      schritte: [
-        "Beim Zubettbringen fragst du: „Was waren heute drei gute Dinge?“",
-        "Es dürfen auch kleine Dinge sein: das Lieblingsessen, ein Lachen, die Sonne.",
-        "Frag bei einem Punkt nach: „Was hast du dazu beigetragen?“ So erlebt dein Kind: Ich kann Gutes bewirken.",
-        "Erzähl auch deine drei guten Dinge.",
-        "Wer mag, schreibt oder malt die Dinge in ein kleines Glücks-Heft."
+      uebungen: [
+        {
+          titel: "Atmen mit Fina",
+          figur: "fina",
+          dauer: "3 Min.",
+          material: "nichts",
+          intro: "Wenn Gefühle groß werden, hilft der Atem, wieder ruhig zu werden. Fina, das Faultier aus der GlüXbande, hat nie Eile und atmet ganz langsam.",
+          schritte: [
+            "Setzt euch bequem hin oder legt euch auf den Rücken. Dein Kind legt eine Hand auf den Bauch.",
+            "Langsam wie Fina durch die Nase einatmen und bis 4 zählen: Der Bauch wird groß und rund wie ein Ballon.",
+            "Kurz die Luft anhalten und bis 2 zählen.",
+            "Langsam durch den Mund ausatmen und bis 6 zählen: Der Ballon wird wieder klein. Fünf Runden wiederholen."
+          ],
+          tipp: "Übt das Fina-Atmen in ruhigen Momenten. Dann kann dein Kind es auch abrufen, wenn es wirklich aufgeregt ist."
+        },
+        {
+          titel: "Der Gefühls-Check am Abendbrottisch",
+          dauer: "5 Min.",
+          material: "nichts",
+          intro: "Auf „Wie war's in der Schule?“ kommt oft nur „Gut.“ Mit dem Gefühls-Check erfährst du viel mehr – ohne Verhör.",
+          schritte: [
+            "Jeder am Tisch zeigt mit der Hand, wie sein Tag war: Daumen hoch, zur Seite oder runter.",
+            "Reihum erzählt jede Person einen Moment, in dem sie sich heute gut gefühlt hat.",
+            "Wer mag, erzählt auch einen Moment, der doof war. Niemand muss.",
+            "Du fängst an – so lernt dein Kind, dass auch Erwachsene schwierige Momente haben."
+          ],
+          tipp: "Zuhören, nicht bewerten. Ein „Danke, dass du das erzählt hast“ reicht völlig."
+        },
+        {
+          titel: "3 gute Dinge",
+          dauer: "5 Min.",
+          material: "nichts, gern ein kleines Heft",
+          intro: "Wer jeden Tag bewusst auf das Gute schaut, stärkt seine innere Widerstandskraft. Ein schönes Ritual für den Abend.",
+          schritte: [
+            "Beim Zubettbringen fragst du: „Was waren heute drei gute Dinge?“",
+            "Es dürfen auch kleine Dinge sein: das Lieblingsessen, ein Lachen, die Sonne.",
+            "Frag bei einem Punkt nach: „Was hast du dazu beigetragen?“ So erlebt dein Kind: Ich kann Gutes bewirken.",
+            "Erzähl auch deine drei guten Dinge."
+          ],
+          steigerung: "Schreibt oder malt die guten Dinge in ein kleines Glücks-Heft.",
+          tipp: "Nach ein paar Wochen fangen viele Kinder schon tagsüber an, gute Dinge für den Abend zu „sammeln“."
+        }
       ],
-      tipp: "Nach zwei Wochen fängt dein Kind oft schon tagsüber an, gute Dinge für den Abend zu „sammeln“."
-    },
-    {
-      id: "finger-affirmationen",
-      typ: "download",
-      titel: "Finger-Affirmationen",
-      kurz: "Fünf starke Sätze – einer für jeden Finger. Zum Ausdrucken und täglich Üben.",
-      alter: "4–10 Jahre",
-      dauer: "1 Min. täglich",
-      thema: "Selbstbewusstsein",
-      bild: "img/finger-affirmationen.webp",
-      datei: "downloads/finger-affirmationen.png",
-      intro: "Positive Sätze wirken am besten, wenn sie oft wiederholt werden. Mit den Fingern hat dein Kind seine Mutmacher immer dabei – auch vor der Klassenarbeit oder auf dem Schulhof.",
-      schritte: [
-        "Lade das Plakat herunter und hängt es gut sichtbar auf, z. B. am Kühlschrank oder neben dem Bett.",
-        "Daumen und Zeigefinger zusammen: „Ich werde das schaffen.“",
-        "Daumen und Mittelfinger: „Ich bin gut genug.“ – Daumen und Ringfinger: „Ich glaube an mich.“",
-        "Daumen und kleiner Finger: „Ich bin heute mutig.“ Dann die Hand öffnen und tief ausatmen: „Ich bleibe ganz ruhig.“",
-        "Macht die Übung jeden Morgen gemeinsam – nach ein paar Tagen kann dein Kind sie allein."
-      ],
-      tipp: "Zeig deinem Kind, dass es die Finger-Affirmationen ganz unauffällig unter dem Tisch machen kann. Das ist sein kleines Geheimnis."
+      tipp: "Wählt ein Ritual aus und probiert es eine Woche lang jeden Tag aus, bevor ihr das nächste dazunehmt."
     }
   ],
 

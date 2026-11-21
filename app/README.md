@@ -11,10 +11,11 @@ und funktioniert auch offline.
 
 | Was | Wie |
 |---|---|
-| Neues Freebie | Eintrag in `freebies` kopieren und anpassen. Typen: `uebung`, `alltag`, `download`, `serie` |
-| Übungsserie | `typ: "serie"` mit einer Liste `uebungen` – jede Übung wird eine Karte zum Durchwischen (Vorlage: „Koordination für zu Hause“) |
+| Neue Freebie-Kategorie | Eintrag in `freebies` mit `typ: "serie"` und einer Liste `uebungen` – jede Übung wird eine Karte zum Durchwischen (Vorlage: „Koordination für zu Hause“) |
+| Übung zu einer Kategorie hinzufügen | Einen Eintrag in deren `uebungen` ergänzen (Felder: titel, dauer, material, intro, schritte, liste, datei, steigerung, tipp, warum, figur) |
+| Druckversion (PDF) | PDF in `downloads/` legen und bei der Kategorie `datei:` eintragen |
+| Passender Kurs | Bei der Kategorie `kurs:` mit der id des Kurses eintragen → „Tiefer einsteigen?“ |
 | Hervorheben | `neu: true` – Etikett „Neu“ und großer Hinweis oben auf der Startseite |
-| Download-Datei | Datei (PDF/PNG) in `downloads/` legen, bei `datei:` eintragen |
 | Titelbild | Bild in `img/` legen, bei `bild:` eintragen |
 | Wochenimpuls | Eintrag in `impulse` – erscheint automatisch ab `datum`, du kannst also vorplanen |
 | Kurs freischalten | `status: "verfuegbar"` und `kaufLink:` (z. B. Digistore24, CopeCart, Stripe) setzen |

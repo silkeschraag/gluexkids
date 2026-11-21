@@ -50,7 +50,7 @@
   const fmtDate = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 
   const TYPES = {
-    serie:    { label: 'Übungsserie',  plural: 'Serien',    icon: 'move',     farbe: 'orange' },
+    serie:    { label: 'Thema',  plural: 'Serien',    icon: 'move',     farbe: 'orange' },
     uebung:   { label: 'Übung',        plural: 'Übungen',   icon: 'zap',      farbe: 'orange' },
     alltag:   { label: 'Für den Alltag', plural: 'Alltag',  icon: 'sun',      farbe: 'green' },
     download: { label: 'Download',     plural: 'Downloads', icon: 'download', farbe: 'blue' }
@@ -114,6 +114,23 @@
         ${metaRow(f)}
       </div>
       ${doneMark(f)}
+    </a>`;
+  }
+
+  function themaCard(f) {
+    const n = f.uebungen ? f.uebungen.length : 0;
+    const d = (store.ex[f.id] || []).length;
+    const img = f.figur
+      ? `<div class="t-img fig" style="background-image:url('img/bande/${esc(f.figur)}.webp')"></div>`
+      : f.bild ? `<div class="t-img" style="background-image:url('${esc(f.bild)}')"></div>` : '';
+    return `<a class="card thema" href="#/freebie/${esc(f.id)}">
+      ${img}
+      <div class="body">
+        <div class="kicker">${typeLabel(f)}</div>
+        <h3>${esc(f.titel)}</h3>
+        <p>${esc(f.kurz)}</p>
+        <div class="meta"><span>${icon('user')} ${esc(f.alter)}</span><span>${icon('move')} ${n} Übungen</span>${d ? `<span class="ok">${icon('check')} ${d} geschafft</span>` : ''}</div>
+      </div>
     </a>`;
   }
 
@@ -201,7 +218,12 @@
         <section class="welcome">
           <span class="kicker accent">Für Eltern · von Silke</span>
           <h1>Starke Kinder beginnen <em>zu Hause.</em></h1>
-          <p>Kleine Übungen, ehrliche Impulse und alltagstaugliche Ideen für mehr Selbstvertrauen in eurer Familie.</p>
+          <p>Ich begleite dich dabei, dein Kind zu stärken: für mehr Selbstvertrauen, innere Stärke und einen klaren Schutz vor Ärgern und Mobbing.</p>
+          <ul class="pillars">
+            <li>${icon('heart')}<span>Selbstvertrauen fördern</span></li>
+            <li>${icon('sun')}<span>Innere Stärke aufbauen</span></li>
+            <li>${icon('shield')}<span>Mobbing vorbeugen</span></li>
+          </ul>
         </section>
         ${installBanner()}
 
@@ -216,7 +238,7 @@
         ${l ? impulsFeature(l, hasNewImpuls()) : ''}
 
         <section class="section">
-          <div class="section-head"><h2>Gratis für dich</h2><a href="#/freebies">Alle ansehen</a></div>
+          <div class="section-head"><h2>Gratis für dich</h2><a href="#/freebies">Alle Themen</a></div>
           <div class="hscroll">${C.freebies.slice().sort((a, b) => (b.neu ? 1 : 0) - (a.neu ? 1 : 0)).map(freebieTile).join('')}</div>
         </section>
 
@@ -226,31 +248,20 @@
         </section>
 
         <section class="section">
-          <div class="section-head"><h2>Online-Kurse</h2><a href="#/kurse">Alle Kurse</a></div>
+          <div class="section-head"><h2>Tiefer einsteigen?</h2><a href="#/kurse">Alle Kurse</a></div>
+          <p class="section-sub">Kompakte Online-Kurse für Eltern – zu Mobbing, Selbstvertrauen und innerer Stärke.</p>
           <div class="list">${C.kurse.slice(0, 2).map(kursCard).join('')}</div>
         </section>
 
         ${newsletterBand()}`;
     },
 
-    freebies(params) {
-      const filter = params.filter || 'alle';
-      const chips = [['alle', 'Alle'], ['uebung', 'Übungen'], ['alltag', 'Für den Alltag'], ['download', 'Downloads'], ['gemerkt', 'Gemerkt']];
-      let items = C.freebies;
-      if (filter === 'gemerkt') items = items.filter((f) => store.fav[f.id]);
-      else if (filter !== 'alle') items = items.filter((f) => f.typ === filter || (filter === 'uebung' && f.typ === 'serie'));
-      const doneCount = C.freebies.filter((f) => store.done[f.id]).length;
+    freebies() {
       return `
         <span class="kicker accent">Kostenlos</span>
         <h1 class="page-title">Freebies für <em>starke Kinder</em></h1>
-        <p class="page-sub">Übungen zum Mitmachen, Aufgaben für den Alltag und Material zum Ausdrucken.${doneCount ? ` Ihr habt schon ${doneCount} von ${C.freebies.length} ausprobiert.` : ''}</p>
-        <div class="chips" role="tablist">
-          ${chips.map(([k, l]) => `<button class="chip${k === filter ? ' active' : ''}" role="tab" aria-selected="${k === filter}" data-filter="${k}">${l}</button>`).join('')}
-        </div>
-        <div class="list">
-          ${items.length ? items.map(freebieCard).join('')
-            : `<div class="empty"><img src="img/bande/foxy.webp" alt="">${filter === 'gemerkt' ? 'Noch nichts gemerkt. Tippe bei einem Freebie auf „Merken“.' : 'Hier kommt bald etwas Neues.'}</div>`}
-        </div>`;
+        <p class="page-sub">Übungen und Rituale, gebündelt nach Themen – zum Durchwischen, Ausprobieren und Abhaken.</p>
+        <div class="list">${C.freebies.map(themaCard).join('')}</div>`;
     },
 
     freebie(params) {
@@ -287,7 +298,7 @@
             <button class="btn btn-ghost" data-action="share" data-title="${esc(f.titel)}">${icon('share')} Teilen</button>
           </div>
         </div>
-        ${relatedKurs()}`;
+        ${relatedKurs(f)}`;
     },
 
     impulse() {
@@ -397,8 +408,9 @@
     return `
       ${f.bild ? `<div class="cover" style="background-image:url('${esc(f.bild)}')"></div>` : ''}
       <section class="d-head">
-        ${f.bild ? '' : `<div class="ic">${icon('move')}</div>`}
-        <span class="kicker accent">Übungsserie · ${esc(f.thema)}</span>
+        ${f.bild || f.figur ? '' : `<div class="ic">${icon('move')}</div>`}
+        ${f.figur && !f.bild ? `<img class="d-fig" src="img/bande/${esc(f.figur)}.webp" alt="">` : ''}
+        <span class="kicker accent">Gratis-Thema · ${esc(f.thema)}</span>
         <h1>${esc(f.titel)}</h1>
         <div class="meta"><span>${icon('user')} ${esc(f.alter)}</span><span>${icon('move')} ${n} Übungen</span><span>${icon('clock')} ${esc(f.dauer)}</span></div>
       </section>
@@ -416,11 +428,16 @@
       <div class="deck" data-deck="${esc(f.id)}">
         ${f.uebungen.map((u, i) => `
         <article class="card ex${done.includes(i) ? ' is-done' : ''}" data-ex="${i}" aria-label="Übung ${i + 1} von ${n}">
-          <div class="ex-top"><span class="ex-num">${pad(i)}</span><span class="ex-of">von ${n}</span></div>
+          <div class="ex-top"><span class="ex-num">${pad(i)}</span><span class="ex-of">von ${n}</span>
+            ${u.figur ? `<img class="ex-fig" src="img/bande/${esc(u.figur)}.webp" alt="">` : ''}</div>
           <h3>${esc(u.titel)}</h3>
-          <div class="meta"><span>${icon('clock')} ${esc(u.dauer)}</span><span>${icon('box')} ${esc(u.material)}</span></div>
-          <ol class="ex-steps">${u.schritte.map((st) => `<li>${rich(st)}</li>`).join('')}</ol>
+          <div class="meta">${u.dauer ? `<span>${icon('clock')} ${esc(u.dauer)}</span>` : ''}${u.material ? `<span>${icon('box')} ${esc(u.material)}</span>` : ''}</div>
+          ${u.intro ? `<p class="ex-intro">${rich(u.intro)}</p>` : ''}
+          <ol class="ex-steps">${u.schritte.map((st) => `<li><span>${rich(st)}</span></li>`).join('')}</ol>
+          ${u.liste ? `<div class="ex-list"><span class="kicker">${esc(u.liste.titel)}</span><ul>${u.liste.punkte.map((p) => `<li>${rich(p)}</li>`).join('')}</ul></div>` : ''}
+          ${u.datei ? `<a class="btn btn-ghost btn-block ex-dl" href="${esc(u.datei)}" download>${icon('download')} ${esc(u.dateiText || 'Herunterladen')}</a>` : ''}
           ${u.steigerung ? `<div class="ex-plus"><span class="kicker">Noch kniffliger</span><p>${rich(u.steigerung)}</p></div>` : ''}
+          ${u.tipp ? `<p class="ex-why"><span class="kicker">Silkes Tipp</span>${rich(u.tipp)}</p>` : ''}
           ${u.warum ? `<p class="ex-why"><span class="kicker">Warum das hilft</span>${rich(u.warum)}</p>` : ''}
           <button class="btn btn-block ${done.includes(i) ? 'btn-done' : 'btn-primary'}" data-ex-done="${i}">${icon('check')} ${done.includes(i) ? 'Geschafft' : 'Haben wir geschafft'}</button>
         </article>`).join('')}
@@ -431,14 +448,12 @@
         <button class="icon-btn" data-deck-go="1" aria-label="Nächste Übung">${icon('chevron')}</button>
       </div>
 
+      ${f.datei ? `<a class="btn btn-accent btn-block" style="margin-top:22px" href="${esc(f.datei)}" download>${icon('printer')} Druckversion herunterladen (PDF)</a>` : ''}
       ${f.tipp ? `<div class="tipp"><span class="kicker">${icon('bulb')} Silkes Tipp</span><p>${rich(f.tipp)}</p></div>` : ''}
       <div class="actions">
-        <div class="actions-row">
-          <button class="btn btn-ghost" data-action="fav" data-id="${esc(f.id)}">${icon('bookmark')} ${store.fav[f.id] ? 'Gemerkt' : 'Merken'}</button>
-          <button class="btn btn-ghost" data-action="share" data-title="${esc(f.titel)}">${icon('share')} Teilen</button>
-        </div>
+        <button class="btn btn-ghost btn-block" data-action="share" data-title="${esc(f.titel)}">${icon('share')} Mit anderen Eltern teilen</button>
       </div>
-      ${relatedKurs()}`;
+      ${relatedKurs(f)}`;
   }
 
   /* Karten-Stapel: Position merken, Punkte aktualisieren */
@@ -483,15 +498,17 @@
     view.querySelector('[data-progress]').innerHTML = `<b>${count}</b> von ${n} geschafft`;
     view.querySelector('[data-bar]').style.width = `${(count / n) * 100}%`;
     view.querySelectorAll('.dot-btn')[i].classList.toggle('done', nowDone);
-    if (count === n && !store.done[id]) { store.done[id] = true; toast('Alle 10 Übungen geschafft – ihr seid flink wie Foxy!'); }
+    if (count === n && !store.done[id]) { store.done[id] = true; toast(`Alle ${n} Übungen geschafft – stark gemacht!`); }
     else if (nowDone) { toast(`Übung ${i + 1} geschafft`); setTimeout(() => deckGo(deck, i + 1, true), 450); }
     save();
   }
 
-  function relatedKurs() {
-    const k = C.kurse[0];
-    if (!k) return '';
-    return `<hr class="rule"><div class="section-head"><h2>Tiefer einsteigen?</h2></div>${kursCard(k, 0)}`;
+  /* Passender Kurs zum Thema (Feld „kurs“ in content.js) */
+  function relatedKurs(f) {
+    const i = f && f.kurs ? C.kurse.findIndex((k) => k.id === f.kurs) : -1;
+    if (i < 0) return '';
+    return `<hr class="rule"><div class="section-head"><h2>Tiefer einsteigen?</h2></div>
+      <p class="section-sub">Du möchtest mehr dazu wissen? Dieser Online-Kurs passt zum Thema.</p>${kursCard(C.kurse[i], i)}`;
   }
 
   function notFound() {
