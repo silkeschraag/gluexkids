@@ -91,6 +91,7 @@ window.GLUX_CONTENT = {
       alter: "4–10 Jahre",
       dauer: "je 2–5 Min.",
       thema: "Koordination",
+      bild: "img/foxy-balance.webp",
       intro: [
         "Koordination ist viel mehr als Geschicklichkeit. Wenn Kinder balancieren, fangen oder Arme und Beine überkreuz bewegen, müssen Körper und Kopf eng zusammenarbeiten. Genau das stärkt Konzentration, Körpergefühl – und das Vertrauen in sich selbst: **Ich kann das!**",
         "Bei GlüXkids steht Koordination deshalb immer am Anfang. Diese 10 Übungen könnt ihr ganz einfach zu Hause machen. Ihr braucht keine Turnhalle, nur ein bisschen Platz und Lust auf Bewegung."
@@ -211,24 +212,24 @@ window.GLUX_CONTENT = {
           warum: "Rhythmus fördert Merkfähigkeit, Zuhören und das Timing von Bewegungen."
         },
         {
-          titel: "Der Fuchs-Parcours",
+          titel: "Foxys Parcours",
           dauer: "5 Min.",
           material: "Stühle, Kissen, Decke",
           schritte: [
             "Baut gemeinsam einen kleinen Parcours: unter dem Tisch durchkriechen, über ein Kissen steigen, durch einen Deckentunnel krabbeln.",
-            "Euer Kind schleicht wie ein Fuchs hindurch – leise, flink und geschmeidig.",
+            "Euer Kind schleicht wie Foxy hindurch – leise, flink und geschmeidig.",
             "Danach baut euer Kind einen Parcours für dich!"
           ],
           steigerung: "Mit Stoppuhr auf Zeit oder mit einem Sockenball, der unterwegs nicht runterfallen darf.",
           warum: "Klettern, Kriechen und Krabbeln verbinden viele Bewegungsformen – und das Selberbauen macht stolz."
         }
       ],
-      tipp: "Macht aus den Übungen eine kleine Morgen- oder Abendroutine: Jeden Tag zieht euer Kind eine Übung – und am Wochenende gibt es den großen Fuchs-Parcours."
+      tipp: "Macht aus den Übungen eine kleine Morgen- oder Abendroutine: Jeden Tag zieht euer Kind eine Übung – und am Wochenende gibt es Foxys großen Parcours."
     },
     {
       id: "fuchs-power-pose",
       typ: "uebung",
-      titel: "Die Fuchs-Power-Pose",
+      titel: "Foxys Power-Pose",
       kurz: "In 2 Minuten mutiger: Körperhaltung, die Selbstvertrauen schenkt.",
       alter: "4–12 Jahre",
       dauer: "2 Min.",
@@ -236,7 +237,7 @@ window.GLUX_CONTENT = {
       intro: "Unsere Haltung beeinflusst, wie wir uns fühlen. Wer aufrecht steht, fühlt sich stärker – und wirkt auch so. Perfekt vor dem Kindergarten, der Schule oder einer Herausforderung.",
       schritte: [
         "Stellt euch gemeinsam hin, die Füße etwa schulterbreit auseinander.",
-        "Rücken gerade, Kopf hoch, Schultern locker nach hinten – wie ein stolzer Fuchs.",
+        "Rücken gerade, Kopf hoch, Schultern locker nach hinten – so stolz wie Foxy.",
         "Hände in die Hüften stemmen oder die Arme wie ein Sieger nach oben strecken.",
         "Dreimal tief durch die Nase einatmen und laut ausatmen: „Ich bin stark!“",
         "Noch 30 Sekunden so stehen bleiben und grinsen. Ja, das darf albern sein!"
@@ -263,9 +264,9 @@ window.GLUX_CONTENT = {
       tipp: "Wichtig: Nach dem Stopp darf sich dein Kind immer umdrehen und weggehen – und sich Hilfe bei einem Erwachsenen holen. Das ist kein Petzen, sondern mutig."
     },
     {
-      id: "atem-igel",
+      id: "atmen-mit-fina",
       typ: "uebung",
-      titel: "Der Atem-Igel",
+      titel: "Atmen mit Fina",
       kurz: "Eine Beruhigungsübung für Wut, Aufregung und schlechte Tage.",
       alter: "4–10 Jahre",
       dauer: "3 Min.",
@@ -273,13 +274,13 @@ window.GLUX_CONTENT = {
       intro: "Wenn Gefühle groß werden, hilft der Atem, wieder ruhig zu werden. Mit einem Bild im Kopf fällt das Kindern viel leichter.",
       schritte: [
         "Setzt euch bequem hin oder legt euch auf den Rücken.",
-        "Dein Kind legt eine Hand auf den Bauch – dort wohnt ein kleiner Igel.",
-        "Langsam durch die Nase einatmen und bis 4 zählen: Der Igel plustert sich auf und wird groß und rund.",
+        "Erzähl von Fina, dem Faultier aus der GlüXbande: Sie hat nie Eile und atmet ganz langsam. Dein Kind legt eine Hand auf den Bauch.",
+        "Langsam wie Fina durch die Nase einatmen und bis 4 zählen: Der Bauch wird groß und rund wie ein Ballon.",
         "Kurz die Luft anhalten und bis 2 zählen.",
-        "Langsam durch den Mund ausatmen und bis 6 zählen: Der Igel rollt sich gemütlich zusammen.",
+        "Langsam durch den Mund ausatmen und bis 6 zählen: Der Ballon wird wieder klein.",
         "Fünf Runden wiederholen. Danach fragen: „Wie fühlt sich dein Bauch jetzt an?“"
       ],
-      tipp: "Übt den Atem-Igel in ruhigen Momenten. Dann kann dein Kind ihn auch abrufen, wenn es wirklich aufgeregt ist."
+      tipp: "Übt das Fina-Atmen in ruhigen Momenten. Dann kann dein Kind es auch abrufen, wenn es wirklich aufgeregt ist."
     },
     {
       id: "gefuehls-check",
@@ -396,7 +397,7 @@ window.GLUX_CONTENT = {
     {
       id: "selbstbewusstsein-training",
       titel: "Selbstbewusstseins-Training für Kinder",
-      kurz: "Mitmach-Kurs für Kinder: spielerisch stark werden – mit dem Fuchs und der GlüXbande.",
+      kurz: "Mitmach-Kurs für Kinder: spielerisch stark werden – mit Foxy und der GlüXbande.",
       preis: "19 €",
       status: "bald",
       kaufLink: "",

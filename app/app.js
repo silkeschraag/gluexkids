@@ -203,8 +203,8 @@
         </section>
         ${installBanner()}
 
-        ${C.freebies.filter((f) => f.neu).slice(0, 1).map((f) => `<a class="spotlight" href="#/freebie/${esc(f.id)}">
-          <div class="spot-ic">${icon(TYPES[f.typ].icon)}</div>
+        ${C.freebies.filter((f) => f.neu).slice(0, 1).map((f) => `<a class="spotlight${f.bild ? ' has-img' : ''}" href="#/freebie/${esc(f.id)}">
+          ${f.bild ? `<div class="spot-img" style="background-image:url('${esc(f.bild)}')"></div>` : `<div class="spot-ic">${icon(TYPES[f.typ].icon)}</div>`}
           <span class="kicker">Neu · Gratis für dich</span>
           <h3>${esc(f.titel)}</h3>
           <p>${esc(f.kurz)}</p>
@@ -363,12 +363,21 @@
           <p>Mit dieser App möchte ich dich als Mama oder Papa im Alltag begleiten: mit kleinen Übungen, Wochenimpulsen und Kursen, die wirklich etwas verändern.</p>
         </div>
         <p class="signature">Herzlich, deine Silke</p>
+        <div class="badge-row">
+          <img src="img/siegel-mobbing.png" alt="Siegel: Ganzheitlicher Mobbingpräventions-Trainer, Akademie für ganzheitliches Kinder- und Jugendcoaching">
+          <p><span class="kicker">Zertifiziert</span>Ganzheitliche Mobbingpräventions-Trainerin der Akademie für ganzheitliches Kinder- &amp; Jugendcoaching®</p>
+        </div>
         <div class="creds">
           <div>${icon('award')} Zertifizierte Resilienz-Trainerin</div>
-          <div>${icon('shield')} Mobbingpräventions-Coach</div>
           <div>${icon('heart')} TaffeTiger® Trainerin</div>
           <div>${icon('cap')} Staatlich geprüfter Stresscoach</div>
         </div>
+        <section class="bande">
+          <img src="img/glueckbande.webp" alt="Die GlüXkids-Bande: Foxy, Leo, Paul, Fina, Samy, Taffi und Clara" loading="lazy">
+          <span class="kicker accent">Die GlüXbande</span>
+          <h2>Foxy und seine <em>Freunde</em></h2>
+          <p>In der App begleitet dich <strong>Foxy, der Fuchs</strong>. Ab und zu schauen auch seine Freunde vorbei: Leo, Paul, Fina, Samy, Taffi und Clara. Gemeinsam zeigen sie: Jedes Kind ist auf seine Weise stark.</p>
+        </section>
         <div class="links">
           <a class="card" href="${esc(s.webseite)}" target="_blank" rel="noopener">${icon('globe')} gluexkids.de – Kurse vor Ort ${icon('external')}</a>
           <a class="card" href="${esc(s.newsletterLink)}" target="_blank" rel="noopener">${icon('mail')} Newsletter abonnieren ${icon('external')}</a>
@@ -384,8 +393,9 @@
     const n = f.uebungen.length;
     const pad = (i) => String(i + 1).padStart(2, '0');
     return `
+      ${f.bild ? `<div class="cover" style="background-image:url('${esc(f.bild)}')"></div>` : ''}
       <section class="d-head">
-        <div class="ic">${icon('move')}</div>
+        ${f.bild ? '' : `<div class="ic">${icon('move')}</div>`}
         <span class="kicker accent">Übungsserie · ${esc(f.thema)}</span>
         <h1>${esc(f.titel)}</h1>
         <div class="meta"><span>${icon('user')} ${esc(f.alter)}</span><span>${icon('move')} ${n} Übungen</span><span>${icon('clock')} ${esc(f.dauer)}</span></div>
@@ -471,7 +481,7 @@
     view.querySelector('[data-progress]').innerHTML = `<b>${count}</b> von ${n} geschafft`;
     view.querySelector('[data-bar]').style.width = `${(count / n) * 100}%`;
     view.querySelectorAll('.dot-btn')[i].classList.toggle('done', nowDone);
-    if (count === n && !store.done[id]) { store.done[id] = true; toast('Alle 10 Übungen geschafft – ihr seid flink wie ein Fuchs!'); }
+    if (count === n && !store.done[id]) { store.done[id] = true; toast('Alle 10 Übungen geschafft – ihr seid flink wie Foxy!'); }
     else if (nowDone) { toast(`Übung ${i + 1} geschafft`); setTimeout(() => deckGo(deck, i + 1, true), 450); }
     save();
   }

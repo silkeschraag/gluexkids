@@ -233,6 +233,20 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 .spotlight p { font-size: 15px; color: color-mix(in srgb, var(--cream) 78%, transparent); margin: 0 0 18px; }
 .spotlight .btn { padding: 12px 20px; font-size: 14.5px; }
 
+.spotlight.has-img { padding-top: 0; }
+.spot-img { margin: 0 -22px 20px; aspect-ratio: 16 / 10; background: center 28% / cover; }
+.spotlight.has-img::after { display: none; }
+
+/* über mich: siegel & bande */
+.badge-row { display: flex; gap: 16px; align-items: center; margin: 26px 0 0; padding: 16px; border-radius: var(--r-md); background: var(--cream); border: 1px solid var(--sand); }
+.badge-row img { width: 84px; height: auto; flex: none; }
+.badge-row p { margin: 0; font-size: 14.5px; line-height: 1.45; font-weight: 600; }
+.badge-row .kicker { display: block; margin-bottom: 3px; }
+.bande { margin: 34px 0 26px; text-align: center; }
+.bande img { width: 220px; margin: 0 auto 18px; }
+.bande h2 { font-size: 26px; margin: 8px 0 10px; }
+.bande p { color: var(--ink-soft); font-size: 16px; text-align: left; }
+
 /* ------------------------------------------------------- übungsserie */
 .type .badge-new, .kicker .badge-new { margin-left: 6px; vertical-align: 1px; }
 .hinweise { margin: 22px 0 6px; padding: 20px; border-radius: var(--r-md); background: var(--cream); border: 1px solid var(--sand); }

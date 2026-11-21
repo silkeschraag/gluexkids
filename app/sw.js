@@ -1,10 +1,10 @@
 /* GlüXkids Eltern-App — Service Worker (offline nutzbar)
    Bei inhaltlichen Änderungen VERSION hochzählen, damit alle Geräte neu laden. */
-const VERSION = 'gluexkids-v4';
+const VERSION = 'gluexkids-v5';
 const CORE = [
   './', 'index.html', 'styles.css', 'app.js', 'content.js', 'manifest.webmanifest',
   'img/logo.png', 'img/fox.png', 'img/silke.webp', 'img/mutig.webp',
-  'img/erzaehl-doch-mal.webp', 'img/finger-affirmationen.webp',
+  'img/erzaehl-doch-mal.webp', 'img/finger-affirmationen.webp', 'img/foxy-balance.webp',
   'icons/icon-192.png', 'icons/favicon.png'
 ];
 
