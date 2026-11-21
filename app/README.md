@@ -12,7 +12,8 @@ und funktioniert auch offline.
 | Was | Wie |
 |---|---|
 | Neue Freebie-Kategorie | Eintrag in `freebies` mit `typ: "serie"` und einer Liste `uebungen` – jede Übung wird eine Karte zum Durchwischen (Vorlage: „Koordination für zu Hause“) |
-| Übung zu einer Kategorie hinzufügen | Einen Eintrag in deren `uebungen` ergänzen (Felder: titel, dauer, material, intro, schritte, liste, datei, steigerung, tipp, warum, figur) |
+| Übung zu einer Kategorie hinzufügen | Einen Eintrag in deren `uebungen` ergänzen (Felder: titel, dauer, material, intro, schritte, liste, spiel, datei, steigerung, tipp, warum, figur, neu) |
+| Neue Übung hervorheben | Bei der neuen Übung `neu: "JJJJ-MM-TT"` (Datum von heute) eintragen → 30 Tage lang „Neue Übung hinzugekommen“ in der Übersicht und „Neu“ auf der Karte |
 | Druckversion (PDF) | PDF in `downloads/` legen und bei der Kategorie `datei:` eintragen |
 | Passender Kurs | Bei der Kategorie `kurs:` mit der id des Kurses eintragen → „Tiefer einsteigen?“ |
 | Hervorheben | `neu: true` – Etikett „Neu“ und großer Hinweis oben auf der Startseite |

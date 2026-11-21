@@ -84,14 +84,17 @@ window.GLUX_CONTENT = {
 
      Jede Übung (Karte) kann enthalten:
        titel, dauer, material, figur, intro, schritte, liste {titel, punkte},
-       datei + dateiText, steigerung, tipp, warum                              */
+       spiel {titel, text}, datei + dateiText, steigerung, tipp, warum
+       neu: "JJJJ-MM-TT"  = Datum, an dem du die Übung neu hinzugefügt hast.
+                            30 Tage lang erscheint dann „Neue Übung hinzugekommen“
+                            in der Übersicht und „Neu“ auf der Karte.          */
   freebies: [
     {
       id: "koordination-zuhause",
       typ: "serie",
       neu: true,
-      titel: "Koordination für zu Hause",
-      kurz: "10 kleine Bewegungsspiele für Wohnzimmer und Kinderzimmer – ohne Turnhalle, mit Material, das ihr schon habt.",
+      titel: "Koordinationsübungen für zu Hause",
+      kurz: "Kleine Bewegungsspiele für Wohnzimmer und Kinderzimmer – ohne Turnhalle, mit Material, das ihr schon habt.",
       alter: "4–10 Jahre",
       dauer: "je 2–5 Min.",
       thema: "Koordination",
@@ -99,7 +102,7 @@ window.GLUX_CONTENT = {
       kurs: "selbstbewusstsein-training",
       intro: [
         "Koordination ist viel mehr als Geschicklichkeit. Wenn Kinder balancieren, fangen oder Arme und Beine überkreuz bewegen, müssen Körper und Kopf eng zusammenarbeiten. Genau das stärkt Konzentration, Körpergefühl – und das Vertrauen in sich selbst: **Ich kann das!**",
-        "Bewegung ist bei GlüXkids einer der Wege zu mehr Selbstvertrauen. Diese 10 Übungen könnt ihr ganz einfach zu Hause machen. Ihr braucht keine Turnhalle, nur ein bisschen Platz und Lust auf Bewegung."
+        "Bewegung ist bei GlüXkids einer der Wege zu mehr Selbstvertrauen. Diese Übungen könnt ihr ganz einfach zu Hause machen. Ihr braucht keine Turnhalle, nur ein bisschen Platz und Lust auf Bewegung."
       ],
       hinweise: [
         "Lieber jeden Tag 5 Minuten als einmal pro Woche eine Stunde.",
@@ -108,6 +111,19 @@ window.GLUX_CONTENT = {
         "Sucht euch 2–3 Lieblingsübungen aus und steigert sie nach und nach."
       ],
       uebungen: [
+        {
+          titel: "Zähneputzen mal anders",
+          dauer: "2 Min. · jeden Morgen",
+          material: "Zahnbürste",
+          schritte: [
+            "Heute putzt dein Kind die Zähne mit der anderen Hand. Rechtshänder nehmen also links, Linkshänder rechts.",
+            "Das fühlt sich erst ungewohnt an, und genau darum geht es. Lacht gemeinsam darüber.",
+            "Wer mag, stellt sich dabei zusätzlich auf ein Bein und wechselt nach der Hälfte der Zeit."
+          ],
+          steigerung: "Auf einem Bein stehen **und** mit der anderen Hand putzen.",
+          tipp: "Macht daraus ein kleines Morgenritual. So wird Zähneputzen zum Spiel. Damit die Zähne trotzdem sauber werden, putzt du am Ende kurz nach.",
+          warum: "Klingt simpel, wirkt aber: Ungewohnte Bewegungen fordern das Gehirn heraus, es entstehen neue Impulse. Das ist gut für die Konzentration und für den Mut, Neues auszuprobieren."
+        },
         {
           titel: "Der Überkreuz-Marsch",
           dauer: "2 Min.",
@@ -130,6 +146,10 @@ window.GLUX_CONTENT = {
             "Dann das Bein wechseln."
           ],
           steigerung: "Augen zu! Oder auf einem Sofakissen stehen – das wackelt richtig.",
+          spiel: {
+            titel: "Spielidee: Flamingo-Stopptanz",
+            text: "Macht Musik an und tanzt wild durchs Zimmer. Sobald die Musik stoppt, geht dein Kind blitzschnell in den Flamingo-Stand und hält ihn, bis die Musik weiterläuft. Mit Musik macht das gleich doppelt so viel Spaß."
+          },
           warum: "Der Einbeinstand trainiert das Gleichgewicht und die Körperspannung."
         },
         {
@@ -151,9 +171,9 @@ window.GLUX_CONTENT = {
           schritte: [
             "Legt eine Schnur in einer langen Linie auf den Boden oder klebt einen Streifen Krepp.",
             "Euer Kind balanciert wie im Zirkus darüber – Fuß vor Fuß, die Arme zur Seite.",
-            "Am Ende gibt es eine große Verbeugung und Applaus."
+            "Klappt das sicher? Dann geht es auch rückwärts oder mit einem Kuscheltier auf dem Kopf."
           ],
-          steigerung: "Rückwärts gehen, ein Kuscheltier auf dem Kopf tragen oder die Schnur in Kurven legen.",
+          steigerung: "Hüpfen statt balancieren! Mit geschlossenen Beinen seitlich über die Linie springen, von links nach rechts und wieder zurück. Profis schaffen das auch auf einem Bein.",
           warum: "Balancieren schult Gleichgewicht, Konzentration und genaues Hinschauen."
         },
         {

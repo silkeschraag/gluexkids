@@ -58,7 +58,7 @@
 
   /* ------------------------------------------------- local storage (safe) */
   const KEY = 'gluexkids-app-v1';
-  let store = { done: {}, fav: {}, steps: {}, ex: {}, pos: {}, notes: {}, waitlist: {}, seenImpuls: '', installDismissed: false };
+  let store = { done: {}, fav: {}, steps: {}, ex: {}, pos: {}, seenEx: {}, notes: {}, waitlist: {}, seenImpuls: '', installDismissed: false };
   try { Object.assign(store, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { /* privat-modus o.ä. */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* ignorieren */ } };
 
@@ -67,6 +67,15 @@
   const latestImpuls = () => impulse()[0];
   const hasNewImpuls = () => { const l = latestImpuls(); return !!l && store.seenImpuls !== l.id; };
   const freebie = (id) => C.freebies.find((f) => f.id === id);
+  const exKey = (u) => u.id || u.titel;
+  const daysSince = (iso) => (new Date(today() + 'T12:00:00') - new Date(iso + 'T12:00:00')) / 864e5;
+  const isRecent = (u) => !!u.neu && daysSince(u.neu) >= 0 && daysSince(u.neu) <= 30;
+  /* neue Übungen, die dieses Gerät im Thema noch nicht gesehen hat */
+  const newExCount = (f) => (f.uebungen || []).filter((u) => isRecent(u) && !(store.seenEx[f.id] || []).includes(exKey(u))).length;
+  const doneKeys = (f) => {
+    const keys = (f.uebungen || []).map(exKey);
+    return (store.ex[f.id] || []).filter((k) => keys.includes(k));
+  };
 
   /* -------------------------------------------------------------- toast */
   const toastEl = document.getElementById('toast');
@@ -91,7 +100,11 @@
   const doneMark = (f) => store.done[f.id] ? `<span class="done-mark" title="Ausprobiert">${icon('check')}</span>` : '';
   const metaRow = (f) => `<div class="meta"><span>${icon('user')} ${esc(f.alter)}</span>${f.uebungen
     ? `<span>${icon('move')} ${f.uebungen.length} Übungen</span>` : `<span>${icon('clock')} ${esc(f.dauer)}</span>`}</div>`;
-  const typeLabel = (f) => `${TYPES[f.typ].label}${f.neu && !store.done[f.id] ? ' <span class="badge-new">Neu</span>' : ''}`;
+  const typeLabel = (f) => {
+    const n = newExCount(f);
+    if (n) return `${TYPES[f.typ].label} <span class="badge-new">${n === 1 ? 'Neue Übung hinzugekommen' : `${n} neue Übungen`}</span>`;
+    return `${TYPES[f.typ].label}${f.neu && !store.done[f.id] ? ' <span class="badge-new">Neu</span>' : ''}`;
+  };
 
   function freebieCard(f) {
     return `<a class="card fcard" href="#/freebie/${esc(f.id)}">
@@ -119,7 +132,7 @@
 
   function themaCard(f) {
     const n = f.uebungen ? f.uebungen.length : 0;
-    const d = (store.ex[f.id] || []).length;
+    const d = doneKeys(f).length;
     const img = f.figur
       ? `<div class="t-img fig" style="background-image:url('img/bande/${esc(f.figur)}.webp')"></div>`
       : f.bild ? `<div class="t-img" style="background-image:url('${esc(f.bild)}')"></div>` : '';
@@ -232,7 +245,7 @@
           <span class="kicker">Neu · Gratis für dich</span>
           <h3>${esc(f.titel)}</h3>
           <p>${esc(f.kurz)}</p>
-          <span class="btn btn-light">${store.ex[f.id] && store.ex[f.id].length ? 'Weitermachen' : 'Jetzt starten'} ${icon('arrow')}</span>
+          <span class="btn btn-light">${doneKeys(f).length ? 'Weitermachen' : 'Jetzt starten'} ${icon('arrow')}</span>
         </a>`).join('')}
 
         ${l ? impulsFeature(l, hasNewImpuls()) : ''}
@@ -402,8 +415,12 @@
   };
 
   function serieView(f) {
-    const done = store.ex[f.id] || [];
+    const dk = doneKeys(f);
+    const isDone = (u) => dk.includes(exKey(u));
     const n = f.uebungen.length;
+    const doneCount = dk.length;
+    /* alle Übungen gelten ab jetzt als gesehen */
+    store.seenEx[f.id] = f.uebungen.map(exKey); save();
     const pad = (i) => String(i + 1).padStart(2, '0');
     return `
       ${f.bild ? `<div class="cover" style="background-image:url('${esc(f.bild)}')"></div>` : ''}
@@ -420,31 +437,32 @@
 
       <div class="deck-head">
         <h2 class="h-small" style="margin:0">Die Übungen</h2>
-        <span class="deck-progress" data-progress><b>${done.length}</b> von ${n} geschafft</span>
+        <span class="deck-progress" data-progress><b>${doneCount}</b> von ${n} geschafft</span>
       </div>
-      <div class="progress-bar"><span data-bar style="width:${(done.length / n) * 100}%"></span></div>
+      <div class="progress-bar"><span data-bar style="width:${(doneCount / n) * 100}%"></span></div>
       <p class="hint" style="margin:0 0 12px">Wische nach links für die nächste Übung.</p>
 
       <div class="deck" data-deck="${esc(f.id)}">
         ${f.uebungen.map((u, i) => `
-        <article class="card ex${done.includes(i) ? ' is-done' : ''}" data-ex="${i}" aria-label="Übung ${i + 1} von ${n}">
-          <div class="ex-top"><span class="ex-num">${pad(i)}</span><span class="ex-of">von ${n}</span>
+        <article class="card ex${isDone(u) ? ' is-done' : ''}" data-ex="${i}" aria-label="Übung ${i + 1} von ${n}">
+          <div class="ex-top"><span class="ex-num">${pad(i)}</span><span class="ex-of">von ${n}</span>${isRecent(u) ? '<span class="badge-new">Neu</span>' : ''}
             ${u.figur ? `<img class="ex-fig" src="img/bande/${esc(u.figur)}.webp" alt="">` : ''}</div>
           <h3>${esc(u.titel)}</h3>
           <div class="meta">${u.dauer ? `<span>${icon('clock')} ${esc(u.dauer)}</span>` : ''}${u.material ? `<span>${icon('box')} ${esc(u.material)}</span>` : ''}</div>
           ${u.intro ? `<p class="ex-intro">${rich(u.intro)}</p>` : ''}
           <ol class="ex-steps">${u.schritte.map((st) => `<li><span>${rich(st)}</span></li>`).join('')}</ol>
           ${u.liste ? `<div class="ex-list"><span class="kicker">${esc(u.liste.titel)}</span><ul>${u.liste.punkte.map((p) => `<li>${rich(p)}</li>`).join('')}</ul></div>` : ''}
+          ${u.spiel ? `<div class="ex-game"><span class="kicker">${esc(u.spiel.titel)}</span><p>${rich(u.spiel.text)}</p></div>` : ''}
           ${u.datei ? `<a class="btn btn-ghost btn-block ex-dl" href="${esc(u.datei)}" download>${icon('download')} ${esc(u.dateiText || 'Herunterladen')}</a>` : ''}
           ${u.steigerung ? `<div class="ex-plus"><span class="kicker">Noch kniffliger</span><p>${rich(u.steigerung)}</p></div>` : ''}
           ${u.tipp ? `<p class="ex-why"><span class="kicker">Silkes Tipp</span>${rich(u.tipp)}</p>` : ''}
           ${u.warum ? `<p class="ex-why"><span class="kicker">Warum das hilft</span>${rich(u.warum)}</p>` : ''}
-          <button class="btn btn-block ${done.includes(i) ? 'btn-done' : 'btn-primary'}" data-ex-done="${i}">${icon('check')} ${done.includes(i) ? 'Geschafft' : 'Haben wir geschafft'}</button>
+          <button class="btn btn-block ${isDone(u) ? 'btn-done' : 'btn-primary'}" data-ex-done="${i}">${icon('check')} ${isDone(u) ? 'Geschafft' : 'Haben wir geschafft'}</button>
         </article>`).join('')}
       </div>
       <div class="deck-nav">
         <button class="icon-btn" data-deck-go="-1" aria-label="Vorherige Übung">${icon('prev')}</button>
-        <div class="dots">${f.uebungen.map((u, i) => `<button class="dot-btn${done.includes(i) ? ' done' : ''}" data-deck-to="${i}" aria-label="Übung ${i + 1}"></button>`).join('')}</div>
+        <div class="dots">${f.uebungen.map((u, i) => `<button class="dot-btn${isDone(u) ? ' done' : ''}" data-deck-to="${i}" aria-label="Übung ${i + 1}"></button>`).join('')}</div>
         <button class="icon-btn" data-deck-go="1" aria-label="Nächste Übung">${icon('chevron')}</button>
       </div>
 
@@ -488,9 +506,10 @@
     const card = btn.closest('.ex'); const deck = card.parentElement;
     const id = deck.dataset.deck; const i = +btn.dataset.exDone;
     const f = freebie(id); const n = f.uebungen.length;
-    const arr = store.ex[id] || [];
-    const nowDone = !arr.includes(i);
-    store.ex[id] = nowDone ? arr.concat(i) : arr.filter((x) => x !== i);
+    const key = exKey(f.uebungen[i]);
+    const arr = doneKeys(f);
+    const nowDone = !arr.includes(key);
+    store.ex[id] = nowDone ? arr.concat(key) : arr.filter((x) => x !== key);
     const count = store.ex[id].length;
     card.classList.toggle('is-done', nowDone);
     btn.className = `btn btn-block ${nowDone ? 'btn-done' : 'btn-primary'}`;
