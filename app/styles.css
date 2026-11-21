@@ -122,7 +122,8 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 /* ------------------------------------------------------------------ home */
 .welcome { padding: 6px 0 4px; }
 .welcome h1 { font-size: 36px; margin: 10px 0 12px; }
-.welcome p { color: var(--ink-soft); font-size: 16.5px; margin: 0; max-width: 34ch; }
+.welcome p { color: var(--ink-soft); font-size: 16.5px; margin: 0 0 12px; max-width: 36ch; }
+.welcome p:last-of-type { margin-bottom: 0; }
 
 .feature { position: relative; display: block; text-decoration: none; border-radius: var(--r-lg); overflow: hidden;
   margin-top: 24px; box-shadow: var(--sh-lift); background: var(--cream); }

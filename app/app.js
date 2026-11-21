@@ -231,7 +231,8 @@
         <section class="welcome">
           <span class="kicker accent">Für Eltern · von Silke</span>
           <h1>Starke Kinder beginnen <em>zu Hause.</em></h1>
-          <p>Ich begleite dich dabei, dein Kind zu stärken: für mehr Selbstvertrauen, innere Stärke und einen klaren Schutz vor Ärgern und Mobbing.</p>
+          <p>Selbstvertrauen kann man lernen, und du kannst dein Kind dabei begleiten. Kinder, die an sich glauben, gehen mutiger durch die Welt und lassen sich weniger leicht verunsichern.</p>
+          <p>Hier findest du alltagstaugliche Übungen, Wochenimpulse und Elternwissen rund um innere Stärke und Mobbingprävention.</p>
           <ul class="pillars">
             <li>${icon('heart')}<span>Selbstvertrauen fördern</span></li>
             <li>${icon('sun')}<span>Innere Stärke aufbauen</span></li>

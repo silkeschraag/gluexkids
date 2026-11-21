@@ -1,6 +1,6 @@
 /* GlüXkids Eltern-App — Service Worker (offline nutzbar)
    Bei inhaltlichen Änderungen VERSION hochzählen, damit alle Geräte neu laden. */
-const VERSION = 'gluexkids-v9';
+const VERSION = 'gluexkids-v10';
 const CORE = [
   './', 'index.html', 'styles.css', 'app.js', 'content.js', 'manifest.webmanifest',
   'img/logo.png', 'img/bande/foxy.webp', 'img/bande/fina.webp', 'img/silke.webp', 'img/mutig.webp',
