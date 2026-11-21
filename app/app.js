@@ -359,7 +359,7 @@
         <span class="kicker accent">Hallo, ich bin Silke</span>
         <h1 class="page-title">Ich helfe Kindern, an sich selbst zu <em>glauben.</em></h1>
         <div class="prose">
-          <p>Als Resilienz- und Mobbingpräventions-Trainerin begleite ich seit Jahren Kinder und Jugendliche auf dem Weg zu mehr innerer Stärke. Mein Herzensprojekt ist <strong>TaffeTiger®</strong> – ein Programm, das Mut, Selbstvertrauen und mentale Stärke spielerisch erlebbar macht.</p>
+          <p>Als Resilienz- und Mobbingpräventions-Trainerin begleite ich seit Jahren Kinder und Jugendliche auf dem Weg zu mehr innerer Stärke. Mit <strong>GlüXkids</strong> mache ich Mut, Selbstvertrauen und mentale Stärke für Kinder spielerisch erlebbar – mit Bewegung, Herz und klaren Methoden.</p>
           <p>Mit dieser App möchte ich dich als Mama oder Papa im Alltag begleiten: mit kleinen Übungen, Wochenimpulsen und Kursen, die wirklich etwas verändern.</p>
         </div>
         <p class="signature">Herzlich, deine Silke</p>
@@ -471,7 +471,7 @@
     view.querySelector('[data-progress]').innerHTML = `<b>${count}</b> von ${n} geschafft`;
     view.querySelector('[data-bar]').style.width = `${(count / n) * 100}%`;
     view.querySelectorAll('.dot-btn')[i].classList.toggle('done', nowDone);
-    if (count === n && !store.done[id]) { store.done[id] = true; toast('Alle 10 Übungen geschafft – ihr seid richtige Tiger!'); }
+    if (count === n && !store.done[id]) { store.done[id] = true; toast('Alle 10 Übungen geschafft – ihr seid flink wie ein Fuchs!'); }
     else if (nowDone) { toast(`Übung ${i + 1} geschafft`); setTimeout(() => deckGo(deck, i + 1, true), 450); }
     save();
   }

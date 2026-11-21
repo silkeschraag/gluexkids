@@ -211,24 +211,24 @@ window.GLUX_CONTENT = {
           warum: "Rhythmus fördert Merkfähigkeit, Zuhören und das Timing von Bewegungen."
         },
         {
-          titel: "Der Tiger-Parcours",
+          titel: "Der Fuchs-Parcours",
           dauer: "5 Min.",
           material: "Stühle, Kissen, Decke",
           schritte: [
             "Baut gemeinsam einen kleinen Parcours: unter dem Tisch durchkriechen, über ein Kissen steigen, durch einen Deckentunnel krabbeln.",
-            "Euer Kind schleicht wie ein Tiger hindurch – leise und geschmeidig.",
+            "Euer Kind schleicht wie ein Fuchs hindurch – leise, flink und geschmeidig.",
             "Danach baut euer Kind einen Parcours für dich!"
           ],
           steigerung: "Mit Stoppuhr auf Zeit oder mit einem Sockenball, der unterwegs nicht runterfallen darf.",
           warum: "Klettern, Kriechen und Krabbeln verbinden viele Bewegungsformen – und das Selberbauen macht stolz."
         }
       ],
-      tipp: "Macht aus den Übungen eine kleine Morgen- oder Abendroutine: Jeden Tag zieht euer Kind eine Übung – und am Wochenende gibt es den großen Tiger-Parcours."
+      tipp: "Macht aus den Übungen eine kleine Morgen- oder Abendroutine: Jeden Tag zieht euer Kind eine Übung – und am Wochenende gibt es den großen Fuchs-Parcours."
     },
     {
-      id: "tiger-power-pose",
+      id: "fuchs-power-pose",
       typ: "uebung",
-      titel: "Die Tiger-Power-Pose",
+      titel: "Die Fuchs-Power-Pose",
       kurz: "In 2 Minuten mutiger: Körperhaltung, die Selbstvertrauen schenkt.",
       alter: "4–12 Jahre",
       dauer: "2 Min.",
@@ -236,7 +236,7 @@ window.GLUX_CONTENT = {
       intro: "Unsere Haltung beeinflusst, wie wir uns fühlen. Wer aufrecht steht, fühlt sich stärker – und wirkt auch so. Perfekt vor dem Kindergarten, der Schule oder einer Herausforderung.",
       schritte: [
         "Stellt euch gemeinsam hin, die Füße etwa schulterbreit auseinander.",
-        "Rücken gerade, Kopf hoch, Schultern locker nach hinten – wie ein stolzer Tiger.",
+        "Rücken gerade, Kopf hoch, Schultern locker nach hinten – wie ein stolzer Fuchs.",
         "Hände in die Hüften stemmen oder die Arme wie ein Sieger nach oben strecken.",
         "Dreimal tief durch die Nase einatmen und laut ausatmen: „Ich bin stark!“",
         "Noch 30 Sekunden so stehen bleiben und grinsen. Ja, das darf albern sein!"
@@ -263,9 +263,9 @@ window.GLUX_CONTENT = {
       tipp: "Wichtig: Nach dem Stopp darf sich dein Kind immer umdrehen und weggehen – und sich Hilfe bei einem Erwachsenen holen. Das ist kein Petzen, sondern mutig."
     },
     {
-      id: "atem-tiger",
+      id: "atem-igel",
       typ: "uebung",
-      titel: "Der Atem-Tiger",
+      titel: "Der Atem-Igel",
       kurz: "Eine Beruhigungsübung für Wut, Aufregung und schlechte Tage.",
       alter: "4–10 Jahre",
       dauer: "3 Min.",
@@ -273,13 +273,13 @@ window.GLUX_CONTENT = {
       intro: "Wenn Gefühle groß werden, hilft der Atem, wieder ruhig zu werden. Mit einem Bild im Kopf fällt das Kindern viel leichter.",
       schritte: [
         "Setzt euch bequem hin oder legt euch auf den Rücken.",
-        "Dein Kind legt eine Hand auf den Bauch – dort wohnt der kleine Atem-Tiger.",
-        "Langsam durch die Nase einatmen und bis 4 zählen: Der Tiger wird groß und rund.",
+        "Dein Kind legt eine Hand auf den Bauch – dort wohnt ein kleiner Igel.",
+        "Langsam durch die Nase einatmen und bis 4 zählen: Der Igel plustert sich auf und wird groß und rund.",
         "Kurz die Luft anhalten und bis 2 zählen.",
-        "Langsam durch den Mund ausatmen und bis 6 zählen: Der Tiger macht es sich gemütlich.",
+        "Langsam durch den Mund ausatmen und bis 6 zählen: Der Igel rollt sich gemütlich zusammen.",
         "Fünf Runden wiederholen. Danach fragen: „Wie fühlt sich dein Bauch jetzt an?“"
       ],
-      tipp: "Übt den Atem-Tiger in ruhigen Momenten. Dann kann dein Kind ihn auch abrufen, wenn es wirklich aufgeregt ist."
+      tipp: "Übt den Atem-Igel in ruhigen Momenten. Dann kann dein Kind ihn auch abrufen, wenn es wirklich aufgeregt ist."
     },
     {
       id: "gefuehls-check",
@@ -396,7 +396,7 @@ window.GLUX_CONTENT = {
     {
       id: "selbstbewusstsein-training",
       titel: "Selbstbewusstseins-Training für Kinder",
-      kurz: "Mitmach-Kurs für Kinder: spielerisch stark werden nach dem TaffeTiger-Konzept.",
+      kurz: "Mitmach-Kurs für Kinder: spielerisch stark werden – mit dem Fuchs und der GlüXbande.",
       preis: "19 €",
       status: "bald",
       kaufLink: "",
