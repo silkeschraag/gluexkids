@@ -45,11 +45,12 @@
 
   /* ----------------------------------------------------------- helpers */
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const rich = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  const rich = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>');
   const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
   const fmtDate = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 
   const TYPES = {
+    challenge: { label: '7-Tage-Challenge', plural: 'Challenges', icon: 'flame', farbe: 'orange' },
     serie:    { label: 'Thema',  plural: 'Serien',    icon: 'move',     farbe: 'orange' },
     uebung:   { label: 'Übung',        plural: 'Übungen',   icon: 'zap',      farbe: 'orange' },
     alltag:   { label: 'Für den Alltag', plural: 'Alltag',  icon: 'sun',      farbe: 'green' },
@@ -127,6 +128,19 @@
         ${metaRow(f)}
       </div>
       ${doneMark(f)}
+    </a>`;
+  }
+
+  function spotlight(f) {
+    const ch = f.typ === 'challenge';
+    const d = doneKeys(f).length;
+    return `<a class="spotlight${f.bild ? ' has-img' : ''}" href="#/freebie/${esc(f.id)}">
+      ${f.bild ? `<div class="spot-img" style="background-image:url('${esc(f.bild)}')"></div>` : `<div class="spot-ic">${icon(TYPES[f.typ].icon)}</div>`}
+      <span class="kicker">${ch ? `${f.neu ? 'Neu · ' : ''}${esc(f.kicker || TYPES[f.typ].label)}` : 'Neu · Gratis für dich'}</span>
+      <h3>${esc(f.titel)}</h3>
+      <p>${esc(f.kurz)}</p>
+      ${ch && d ? `<p class="spot-prog">${d} von ${f.uebungen.length} Tagen geschafft</p>` : ''}
+      <span class="btn btn-light">${d ? 'Weitermachen' : ch ? 'Challenge starten' : 'Jetzt starten'} ${icon('arrow')}</span>
     </a>`;
   }
 
@@ -241,19 +255,13 @@
         </section>
         ${installBanner()}
 
-        ${C.freebies.filter((f) => f.neu).slice(0, 1).map((f) => `<a class="spotlight${f.bild ? ' has-img' : ''}" href="#/freebie/${esc(f.id)}">
-          ${f.bild ? `<div class="spot-img" style="background-image:url('${esc(f.bild)}')"></div>` : `<div class="spot-ic">${icon(TYPES[f.typ].icon)}</div>`}
-          <span class="kicker">Neu · Gratis für dich</span>
-          <h3>${esc(f.titel)}</h3>
-          <p>${esc(f.kurz)}</p>
-          <span class="btn btn-light">${doneKeys(f).length ? 'Weitermachen' : 'Jetzt starten'} ${icon('arrow')}</span>
-        </a>`).join('')}
+        ${C.freebies.filter((f) => f.neu).slice(0, 1).map(spotlight).join('')}
 
         ${l ? impulsFeature(l, hasNewImpuls()) : ''}
 
         <section class="section">
           <div class="section-head"><h2>Gratis für dich</h2><a href="#/freebies">Alle Themen</a></div>
-          <div class="hscroll">${C.freebies.slice().sort((a, b) => (b.neu ? 1 : 0) - (a.neu ? 1 : 0)).map(freebieTile).join('')}</div>
+          <div class="hscroll">${C.freebies.filter((f) => f.typ !== 'challenge').sort((a, b) => (b.neu ? 1 : 0) - (a.neu ? 1 : 0)).map(freebieTile).join('')}</div>
         </section>
 
         <section class="quote">
@@ -275,13 +283,16 @@
         <span class="kicker accent">Kostenlos</span>
         <h1 class="page-title">Freebies für <em>starke Kinder</em></h1>
         <p class="page-sub">Übungen und Rituale, gebündelt nach Themen – zum Durchwischen, Ausprobieren und Abhaken.</p>
-        <div class="list">${C.freebies.map(themaCard).join('')}</div>`;
+        ${C.freebies.filter((f) => f.typ === 'challenge').map(spotlight).join('')}
+        <div class="section-head" style="margin-top:34px"><h2>Themen</h2></div>
+        <div class="list">${C.freebies.filter((f) => f.typ !== 'challenge').map(themaCard).join('')}</div>`;
     },
 
     freebie(params) {
       const f = freebie(params.id);
       if (!f) return notFound();
       if (f.typ === 'serie') return serieView(f);
+      if (f.typ === 'challenge') return challengeView(f);
       const t = TYPES[f.typ];
       const checked = store.steps[f.id] || [];
       const isDownload = !!f.datei;
@@ -475,6 +486,97 @@
       ${relatedKurs(f)}`;
   }
 
+  function challengeView(f) {
+    const dk = doneKeys(f);
+    const isDone = (u) => dk.includes(exKey(u));
+    const n = f.uebungen.length;
+    const all = dk.length === n;
+    store.seenEx[f.id] = f.uebungen.map(exKey); save();
+    const b = f.bande;
+    const fig = (name) => `img/bande/${esc(name)}.webp`;
+    return `
+      ${f.bild ? `<div class="cover" style="background-image:url('${esc(f.bild)}')"></div>` : ''}
+      <section class="d-head">
+        <span class="kicker accent">${esc(f.kicker || TYPES[f.typ].label)}</span>
+        <h1>${esc(f.titel)}</h1>
+        <div class="meta"><span>${icon('user')} ${esc(f.alter)}</span><span>${icon('flame')} ${n} Tage</span><span>${icon('clock')} ${esc(f.dauer)}</span></div>
+      </section>
+      <p class="lead">${rich(f.kurz)}</p>
+
+      <section class="section">
+        <h2 class="h-small" style="margin-top:0">${esc(f.begruessung.titel)}</h2>
+        <div class="prose">${f.begruessung.text.map((p) => `<p>${rich(p)}</p>`).join('')}</div>
+        <p class="signature" style="margin-top:0">Silke</p>
+      </section>
+
+      <div class="tipp"><span class="kicker">${icon('bulb')} Warum sieben Tage?</span><p>${rich(f.warumSieben)}</p></div>
+
+      <div class="hinweise"><span class="kicker">So läuft die Challenge</span>
+        <ol class="ch-steps">${f.ablauf.map((a) => `<li><span>${rich(a)}</span></li>`).join('')}</ol></div>
+
+      <div class="leitsatz"><p>${esc(f.leitsatz.text)}</p><span>${esc(f.leitsatz.unter)}</span></div>
+
+      <section class="section">
+        <span class="kicker accent">${esc(b.unter)}</span>
+        <h2 class="h-small" style="margin-top:6px">${esc(b.titel)}</h2>
+        <p class="prose-sm">${rich(b.text)}</p>
+        <div class="bande-grid">
+          ${b.figuren.map((x, i) => `<div class="bande-fig"><img src="${fig(x.figur)}" alt="${esc(x.name)}" loading="lazy"><b>${esc(x.name)}</b><span>${esc(x.staerke)}</span><em>Tag ${i + 1}</em></div>`).join('')}
+        </div>
+        <div class="hinweise"><span class="kicker">So nutzt ihr die Bande auch danach</span>
+          <ul class="checklist">${b.danach.map((h) => `<li>${icon('check')}<span>${rich(h)}</span></li>`).join('')}</ul></div>
+      </section>
+
+      <div class="deck-head">
+        <h2 class="h-small" style="margin:0">Eure 7 Tage</h2>
+        <span class="deck-progress" data-progress><b>${dk.length}</b> von ${n} geschafft</span>
+      </div>
+      <div class="progress-bar"><span data-bar style="width:${(dk.length / n) * 100}%"></span></div>
+      <p class="hint" style="margin:0 0 12px">Wische nach links für den nächsten Tag.</p>
+
+      <div class="deck" data-deck="${esc(f.id)}">
+        ${f.uebungen.map((u, i) => `
+        <article class="card ex day${isDone(u) ? ' is-done' : ''}" data-ex="${i}" aria-label="Tag ${i + 1} von ${n}">
+          <div class="ex-top"><span class="day-badge"><small>Tag</small>${i + 1}</span><span class="ex-of">mit ${esc(u.mit)}</span>
+            ${u.figur ? `<img class="ex-fig" src="${fig(u.figur)}" alt="">` : ''}</div>
+          <h3>${esc(u.titel)}</h3>
+          <p class="ex-intro">${rich(u.intro)}</p>
+          <div class="ex-warum"><span class="kicker">Warum das wirkt</span>${u.warum.map((p) => `<p>${rich(p)}</p>`).join('')}</div>
+          <span class="kicker accent ex-uebung">Eure Übung heute${u.uebungTitel ? `: ${esc(u.uebungTitel)}` : ''}</span>
+          <ol class="ex-steps">${u.schritte.map((st) => `<li><span>${rich(st)}</span></li>`).join('')}</ol>
+          ${u.alltag ? `<div class="ex-game"><span class="kicker">Für den Alltag</span><p>${rich(u.alltag)}</p></div>` : ''}
+          ${u.merksatz ? `<blockquote class="ex-merk">${esc(u.merksatz)}${u.merksatzVon ? `<cite>${esc(u.merksatzVon)}</cite>` : ''}</blockquote>` : ''}
+          ${u.kind ? `<div class="ex-list ex-kind"><span class="kicker">Für dein Kind</span><p>${rich(u.kind)}</p></div>` : ''}
+          <button class="btn btn-block ${isDone(u) ? 'btn-done' : 'btn-primary'}" data-ex-done="${i}">${icon('check')} ${isDone(u) ? 'Geschafft' : 'Tag geschafft'}</button>
+        </article>`).join('')}
+      </div>
+      <div class="deck-nav">
+        <button class="icon-btn" data-deck-go="-1" aria-label="Vorheriger Tag">${icon('prev')}</button>
+        <div class="dots">${f.uebungen.map((u, i) => `<button class="dot-btn${isDone(u) ? ' done' : ''}" data-deck-to="${i}" aria-label="Tag ${i + 1}"></button>`).join('')}</div>
+        <button class="icon-btn" data-deck-go="1" aria-label="Nächster Tag">${icon('chevron')}</button>
+      </div>
+
+      ${all ? `<section class="abschluss" id="abschluss">
+        <img src="img/bande/bande-neu.webp" alt="Die GlüXbande">
+        <span class="kicker accent">GlüXbande</span>
+        <h2>${esc(f.abschluss.titel)}</h2>
+        <p>${rich(f.abschluss.text)}</p>
+        <p class="stolz">${esc(f.abschluss.stolz)}</p>
+      </section>` : ''}
+
+      <section class="letter">
+        <img class="letter-fox" src="img/bande/foxy.webp" alt="">
+        <h2>${esc(f.weiter.titel)}</h2>
+        <p>${rich(f.weiter.text)}</p>
+        <ul class="checklist letter-list">${f.weiter.punkte.map((x) => `<li>${icon('check')}<span>${esc(x)}</span></li>`).join('')}</ul>
+        <a class="btn btn-primary" href="${esc(C.einstellungen.newsletterLink)}" target="_blank" rel="noopener">Jetzt eintragen</a>
+        <p class="letter-gruss">${esc(f.weiter.gruss)}</p>
+      </section>
+      <div class="actions">
+        <button class="btn btn-ghost btn-block" data-action="share" data-title="${esc(f.titel)}">${icon('share')} Challenge mit anderen Eltern teilen</button>
+      </div>`;
+  }
+
   /* Karten-Stapel: Position merken, Punkte aktualisieren */
   function deckStep(deck) {
     const cards = deck.children;
@@ -514,12 +616,16 @@
     const count = store.ex[id].length;
     card.classList.toggle('is-done', nowDone);
     btn.className = `btn btn-block ${nowDone ? 'btn-done' : 'btn-primary'}`;
-    btn.innerHTML = `${icon('check')} ${nowDone ? 'Geschafft' : 'Haben wir geschafft'}`;
+    const ch = f.typ === 'challenge';
+    btn.innerHTML = `${icon('check')} ${nowDone ? 'Geschafft' : ch ? 'Tag geschafft' : 'Haben wir geschafft'}`;
     view.querySelector('[data-progress]').innerHTML = `<b>${count}</b> von ${n} geschafft`;
     view.querySelector('[data-bar]').style.width = `${(count / n) * 100}%`;
     view.querySelectorAll('.dot-btn')[i].classList.toggle('done', nowDone);
-    if (count === n && !store.done[id]) { store.done[id] = true; toast(`Alle ${n} Übungen geschafft – stark gemacht!`); }
-    else if (nowDone) { toast(`Übung ${i + 1} geschafft`); setTimeout(() => deckGo(deck, i + 1, true), 450); }
+    if (count === n && !store.done[id]) {
+      store.done[id] = true;
+      toast(ch ? 'Alle 7 Tage geschafft – die Bande ist stolz auf euch!' : `Alle ${n} Übungen geschafft – stark gemacht!`);
+      if (ch) { save(); render(); const a = document.getElementById('abschluss'); if (a) a.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    } else if (nowDone) { toast(`${ch ? 'Tag' : 'Übung'} ${i + 1} geschafft`); setTimeout(() => deckGo(deck, i + 1, true), 450); }
     save();
   }
 

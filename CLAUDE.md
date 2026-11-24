@@ -36,6 +36,8 @@ Eltern werden geduzt.
   Serie mit Karten zum Durchwischen direkt in der App; PDFs nur als zusätzliche Druckversion.
 - Silkes Schwerpunkt ist: **Kinder stärken, Selbstvertrauen fördern, Mobbingprävention** –
   Koordination/Bewegung ist ein Weg dorthin, nicht das Hauptthema.
+- 7-Tage-Challenge „Gemeinsam Superkräfte entdecken“ (`typ: "challenge"`): eigener Button oben
+  auf der Freebie-Seite, alle Tage sofort offen, vorerst ohne Druckversion (PDF hat noch alte Namen).
 - „Tiefer einsteigen?“ = Kurswerbung, nur passend zum Thema (Feld `kurs`) und auf der Startseite.
 - Die Gesprächskarten „Erzähl doch mal“ sind ein **Verkaufsprodukt** – nicht als Freebie-Bild
   verwenden; später mit Link zur Bestellseite.

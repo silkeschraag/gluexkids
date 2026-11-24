@@ -75,6 +75,7 @@ window.GLUX_CONTENT = {
   /* ---------------------------------------------------------------- Freebies
      Freebies sind nach THEMEN gebündelt. Jede Kategorie ist eine Serie mit
      Karten zum Durchwischen (typ: "serie").
+     typ: "challenge" = Tages-Challenge (eigener Button oben auf der Freebie-Seite)
 
      neu: true   = Etikett „Neu“ und großer Hinweis oben auf der Startseite
      bild:       Titelbild der Kategorie (Datei in img/)
@@ -89,6 +90,193 @@ window.GLUX_CONTENT = {
                             30 Tage lang erscheint dann „Neue Übung hinzugekommen“
                             in der Übersicht und „Neu“ auf der Karte.          */
   freebies: [
+    {
+      id: "superkraefte-challenge",
+      typ: "challenge",
+      neu: true,
+      titel: "Gemeinsam Superkräfte entdecken",
+      kicker: "Die 7-Tage-Challenge für Eltern & Kinder",
+      kurz: "Sieben Tage, sieben kleine Übungen. Für mehr Selbstvertrauen bei deinem Kind – und mehr Leichtigkeit bei euch beiden.",
+      alter: "4–10 Jahre",
+      dauer: "ca. 10 Min. am Tag",
+      thema: "Selbstvertrauen",
+      bild: "img/challenge-superkraefte.webp",
+      begruessung: {
+        titel: "Schön, dass ihr da seid",
+        text: [
+          "Hi, ich bin Silke. Seit über 12 Jahren arbeite ich mit Kindern – vormittags an einer Schule, dazu in meinen Kursen und in Workshops an Schulen und Kitas. Und eine Sache sehe ich immer wieder: Kinder werden nicht mutig, weil wir ihnen sagen, dass sie mutig sein sollen. Sie werden mutig, weil sie es geübt haben – im Kleinen, im Sicheren, mit jemandem an ihrer Seite.",
+          "Genau dafür ist diese Woche da. Sieben Tage, sieben Übungen, jede in ein paar Minuten gemacht. Kein Programm, das ihr durchziehen müsst. Eher sieben kleine Türen, die ihr zusammen aufmacht."
+        ]
+      },
+      warumSieben: "Weil eine Woche lang genug ist, dass etwas hängen bleibt – und kurz genug, dass ihr wirklich dranbleibt. Jeder Tag baut auf dem vorherigen auf: erst der Körper, dann die Gefühle, dann die Worte. In dieser Reihenfolge lernen Kinder am leichtesten.",
+      ablauf: [
+        "**Erst die Tageskarte für dich.** Kurz erklärt, was dahintersteckt, und was ihr konkret macht.",
+        "**Dann die Idee für dein Kind.** Eine kleine Aufgabe zum Malen, Nachspielen oder Weitererzählen.",
+        "**Zehn Minuten reichen.** Lieber kurz und mit Freude als lang und mit Seufzen.",
+        "**Ein Tag verpasst? Egal.** Macht am nächsten Tag weiter. Diese Challenge kennt kein Scheitern."
+      ],
+      leitsatz: { text: "Selbstvertrauen ist kein Talent – es ist eine Fähigkeit.", unter: "Und Fähigkeiten kann man üben." },
+      bande: {
+        titel: "Das ist die GlüXbande",
+        unter: "Sieben Figuren, sieben Stärken – eine pro Tag",
+        text: "Kinder verstehen keine Begriffe wie „Selbstregulation“. Aber sie verstehen sofort: *Sei kurz wie Samy und zieh dich zurück.* Deshalb bringt jeden Tag eine Figur aus der Bande mit, worum es geht.",
+        figuren: [
+          { figur: "foxy", name: "Foxy", staerke: "clever sein, schlau reagieren" },
+          { figur: "taffi", name: "Taffi", staerke: "Stärke zeigen, aufrecht stehen" },
+          { figur: "elli", name: "Elli", staerke: "Gefühle erkennen und benennen" },
+          { figur: "pingupik", name: "PinguPik", staerke: "zusammenhalten, Streit schlichten" },
+          { figur: "lio", name: "Lio", staerke: "Mut haben, laut und klar sein" },
+          { figur: "samy", name: "Samy", staerke: "die eigene Stärke immer dabei haben" },
+          { figur: "fina", name: "Fina", staerke: "zur Ruhe kommen und genießen" }
+        ],
+        danach: [
+          "**Als Abkürzung:** „Brauchst du gerade einen Samy-Moment?“ versteht dein Kind sofort – und es klingt nicht nach Kritik.",
+          "**Als Erinnerung:** „Kurz den Tigerstand?“ vor dem Kindergarten wirkt besser als „Du schaffst das schon“.",
+          "**Als Erklärung:** Wenn Geschwister streiten, hilft die Frage „Wer wäre hier gerade PinguPik?“ mehr als jede Ermahnung."
+        ]
+      },
+      uebungen: [
+        {
+          titel: "Welche Superkraft steckt in deinem Kind?",
+          figur: "foxy", mit: "Foxy",
+          intro: "Der erste Tag ist der einfachste – und einer der wichtigsten. Heute geht es nur darum, dass dein Kind eine Figur findet, die sich nach ihm anfühlt.",
+          warum: [
+            "Kinder denken in Bildern, nicht in Eigenschaften. Ein Kind, das von sich sagt „ich bin eher wie Samy“, hat gerade etwas über sich selbst gesagt, was es mit den Worten „ich brauche manchmal Rückzug“ nie hinbekommen hätte.",
+            "Und es hat noch einen Vorteil: Ihr habt ab heute eine gemeinsame Sprache. „Brauchst du gerade einen Samy-Moment?“ ist eine Frage, die kein Kind als Kritik hört."
+          ],
+          schritte: [
+            "Schaut euch die Bande oben gemeinsam an. Lies die sieben Figuren vor.",
+            "Frag dein Kind: *„Wer davon bist du am meisten?“* Keine richtige Antwort, keine Diskussion.",
+            "Frag nach: *„Und warum?“* Hör einfach zu. Diese Antwort ist Gold.",
+            "Sag danach, welche Figur **du** bist – und warum. Kinder machen mit, wenn Erwachsene mitmachen."
+          ],
+          merksatz: "Ein Kind, das sich selbst beschreiben kann, kann sich auch selbst verteidigen.",
+          kind: "Wer bist du in der Bande? Dein Kind darf sich auch zwei Figuren aussuchen. Danach malt es sich als Teil der GlüXbande: Welche Farbe hat dein Hoodie? Was hast du dabei?"
+        },
+        {
+          titel: "Wie du stehst, so fühlst du dich",
+          figur: "taffi", mit: "Taffi",
+          intro: "Heute fangen wir beim Körper an. Nicht bei den Gedanken – der Körper ist bei Kindern immer die schnellere Tür.",
+          warum: [
+            "Was ich im Training seit Jahren beobachte: Ein Kind, das zusammengesunken dasteht, spricht leiser, meldet sich seltener und lässt sich schneller etwas wegnehmen. Richtet es sich auf, ändert sich die Stimme mit – oft innerhalb von Sekunden.",
+            "Der Körper ist keine Folge des Gefühls. Er ist die Abkürzung dorthin. Und diese Abkürzung kann dein Kind lernen, bevor es überhaupt versteht, warum sie funktioniert."
+          ],
+          uebungTitel: "Der Tigerstand",
+          schritte: [
+            "Stellt euch beide hin. Füße hüftbreit, Zehen fest in den Boden.",
+            "Brust raus, Schultern nach hinten, Kinn gerade. Wie ein Tiger, der seinen Platz kennt.",
+            "Dreißig Sekunden halten. Ruhig atmen, nicht anspannen.",
+            "Danach fragen: *„Wie fühlt sich das an?“*",
+            "Zum Vergleich noch mal ganz krumm hinstellen und dasselbe fragen. Den Unterschied spürt jedes Kind sofort."
+          ],
+          alltag: "Vor dem Kindergarten, vor einem Referat, vor dem Sportfest: „Kurz den Tigerstand?“ – das dauert zehn Sekunden und wirkt besser als jedes „Du schaffst das schon“.",
+          kind: "Erst Tigerstand, dann ganz krumm hinstellen. Wie fühlt es sich jeweils an? Danach darf dein Kind seinen Tiger malen: Wie sieht er aus, wenn er ganz sicher auf seinem Platz steht?"
+        },
+        {
+          titel: "Gefühle haben einen Namen",
+          figur: "elli", mit: "Elli",
+          intro: "Elli, der Elefant, trägt einen Regenbogenschal – so bunt und wechselhaft wie Gefühle bei Kindern. Manchmal mehrmals in fünf Minuten. Heute geben wir diesen Farben Namen.",
+          warum: [
+            "Ein Gefühl, das keinen Namen hat, ist einfach nur ein großer, unangenehmer Zustand – und der macht Angst. Sobald ein Kind sagen kann „ich bin enttäuscht“ statt nur zu schreien, wird aus dem Sturm etwas, das man anschauen kann.",
+            "Kinder brauchen dafür Übung an ruhigen Tagen. Mitten im Wutanfall Vokabeln zu lernen, funktioniert bei niemandem."
+          ],
+          uebungTitel: "Der Gefühls-Wetterbericht",
+          schritte: [
+            "Abends, beim Zubettgehen: *„Wie war dein Wetter heute?“*",
+            "Sonne, Wolken, Gewitter, Regenbogen – dein Kind darf frei erfinden.",
+            "Dann fragen: *„Wann war das Gewitter?“* Nur zuhören, nicht lösen.",
+            "Erzähl auch von deinem Wetter. Ehrlich, auch wenn es bewölkt war."
+          ],
+          merksatz: "Kinder müssen Gefühle nicht wegmachen. Sie müssen sie benennen können.",
+          kind: "Male vier Gesichter: Freude, Wut, Angst und Stolz. Wann hattest du dieses Gefühl zuletzt?"
+        },
+        {
+          titel: "Streit ohne Sieger",
+          figur: "pingupik", mit: "PinguPik",
+          intro: "Streit ist kein Problem, das man abschaffen sollte. Streit ist der Ort, an dem Kinder lernen, sich zu behaupten, ohne jemanden umzuwerfen.",
+          warum: [
+            "Kinder wissen im Streit meistens genau, was sie wollen – ihnen fehlen nur die Worte. Und wenn Worte fehlen, kommen Hände. Ein Kind, das drei fertige Sätze im Kopf hat, greift seltener daneben.",
+            "Deshalb üben wir Sätze, nicht Regeln. „Sei lieb zueinander“ hat noch nie einen Streit gelöst. „Stopp. Ich will das nicht.“ schon."
+          ],
+          uebungTitel: "Die drei Sätze",
+          schritte: [
+            "Übt gemeinsam laut: *„Stopp. Ich will das nicht.“*",
+            "Dann: *„Ich war zuerst da.“*",
+            "Und: *„Sollen wir tauschen?“*",
+            "Spielt eine Szene durch – du nimmst dem Kind etwas weg, es antwortet mit einem der Sätze. Dann Rollentausch.",
+            "Wichtig: fester Stand dabei (Tigerstand von Tag 2!), Blick nach vorn, Stimme ruhig und laut."
+          ],
+          alltag: "Diese drei Sätze wirken auf dem Schulhof besser als jeder gute Rat von zu Hause – weil der Mund sie schon mal gesagt hat.",
+          kind: "Spielt Szenen durch: Jemand nimmt dir die Schaufel weg. Ein Kind drängelt sich in der Schlange vor. Jemand lacht über deine Zeichnung. Was sagst du? Welcher Satz war heute dein bester?"
+        },
+        {
+          titel: "Das ist mein Platz",
+          figur: "lio", mit: "Lio",
+          intro: "Heute wird es körperlich. Grenzen setzen lernt kein Kind über ein Gespräch – es lernt es, indem es einmal spürt, wie sich eine Grenze anfühlt.",
+          warum: [
+            "Im Ernstfall hat dein Kind keine Zeit zu überlegen. Es reagiert mit dem, was der Körper schon kennt. Wenn „Das ist mein Platz“ schon hundertmal im Wohnzimmer gesagt wurde, ist der Satz auf dem Schulhof plötzlich da – ohne Nachdenken.",
+            "Genau deshalb üben wir es spielerisch und im Sicheren. Nicht damit dein Kind sich wehrt, sondern damit es gar nicht erst als leichtes Ziel wirkt."
+          ],
+          schritte: [
+            "Stell dich vor dein Kind und schiebe es **ganz sanft** zur Seite – spielerisch, nie mit Kraft.",
+            "Dein Kind sagt laut und deutlich: *„Das ist mein Platz. Gib ihn mir zurück.“*",
+            "Dann gibst du den Platz zurück. Immer. Das ist der wichtigste Teil.",
+            "Drei Runden, dann Rollentausch – dein Kind schiebt, du sagst den Satz.",
+            "Achtet auf feste Füße und ruhige, laute Stimme. Nicht schreien, sondern klar."
+          ],
+          merksatz: "Kleine Übungen im Wohnzimmer wirken im Kindergarten und auf dem Schulhof Wunder.",
+          kind: "Zwei Kuscheltiere üben mit: Eins schiebt, eins sagt den Satz. Und wenn dein Kind wütend wird, hilft die Handatmung: Mit dem Finger am Daumen hoch – einatmen. Wieder runter – ausatmen. Alle fünf Finger."
+        },
+        {
+          titel: "Deine Stärke trägst du immer bei dir",
+          figur: "samy", mit: "Samy",
+          intro: "Samy, die Schildkröte, hat ihren Schutz immer dabei. Genau darum geht es heute: Was kann dein Kind eigentlich – und weiß es das auch?",
+          warum: [
+            "Die meisten Kinder können ihre Schwächen aufzählen, ihre Stärken nicht. Nicht weil sie keine hätten, sondern weil über Schwächen häufiger geredet wird – zu Hause, in der Schule, überall.",
+            "Ein Lob wirkt übrigens nur, wenn es konkret ist. „Du bist so toll“ perlt ab. „Du hast vorhin nicht aufgegeben, obwohl es schwer war“ bleibt hängen, weil das Kind den Moment vor Augen hat."
+          ],
+          uebungTitel: "Drei echte Stärken",
+          schritte: [
+            "Nenne deinem Kind **drei** Dinge, die es gut kann – jedes mit einem konkreten Beispiel von dieser Woche.",
+            "Lass dein Kind raten, welche drei du gleich sagst. Allein diese Frage ist spannend.",
+            "Dann darf dein Kind dir drei Stärken nennen. Nimm sie an, ohne abzuwiegeln.",
+            "Schreibt die drei Stärken deines Kindes auf einen Zettel."
+          ],
+          alltag: "Hängt den Superkraft-Zettel sichtbar auf. An miesen Tagen ist er schneller da als jedes Trostgespräch – und dein Kind liest dort etwas über sich, das von dir kommt.",
+          kind: "Male dein eigenes Superkraft-Zeichen, so wie ein Held sein Zeichen auf der Brust trägt."
+        },
+        {
+          titel: "Feiern – und dranbleiben",
+          figur: "fina", mit: "Fina",
+          intro: "Ihr habt eine Woche lang jeden Tag etwas zusammen gemacht. Das ist mehr, als die meisten schaffen. Heute wird gefeiert – und dann leise weitergemacht.",
+          warum: [
+            "Kinder merken sich nicht die Übung. Sie merken sich das Gefühl, dass Mama oder Papa sich sieben Tage lang Zeit genommen haben. Dieses Gefühl ist das eigentliche Selbstvertrauen-Training.",
+            "Und: Was einmal geübt wurde, verblasst. Was alle paar Tage kurz wiederholt wird, bleibt. Deshalb sucht euch heute euren Lieblingstag aus."
+          ],
+          uebungTitel: "Der Rückblick",
+          schritte: [
+            "Schaut gemeinsam noch einmal durch die Tageskarten.",
+            "Frag: *„Welcher Tag war dein Lieblingstag?“*",
+            "Verabredet, diese eine Übung ab jetzt einmal pro Woche zu machen. Nur eine. Mehr braucht es nicht.",
+            "Lest gemeinsam eure Abschluss-Karte und feiert euch!"
+          ],
+          merksatz: "Wir können Kinder nicht vor allem beschützen. Aber wir können sie innerlich stärken, damit umzugehen.",
+          merksatzVon: "Silke Schraag",
+          kind: "Welcher Tag war dein Lieblingstag?"
+        }
+      ],
+      abschluss: {
+        titel: "Geschafft!",
+        text: "Ihr habt sieben Tage lang geübt: stark zu stehen, Gefühle zu benennen, den eigenen Platz zu behaupten und die eigenen Superkräfte zu kennen.",
+        stolz: "Die ganze Bande ist mächtig stolz auf euch!"
+      },
+      weiter: {
+        titel: "Ihr wollt weitermachen?",
+        text: "Diese sieben Tage sind ein Anfang, kein Abschluss. In meinem Newsletter schicke ich dir regelmäßig kleine Übungen für zu Hause – und du erfährst als Erste, wann neue Kurse starten.",
+        punkte: ["Neue Kurse und Termine zuerst", "Übungen und Impulse für zu Hause", "Praxiswissen aus über 12 Jahren Kindertraining"],
+        gruss: "Ich freue mich auf euch! Silke"
+      }
+    },
     {
       id: "koordination-zuhause",
       typ: "serie",

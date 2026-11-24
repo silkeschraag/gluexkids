@@ -11,6 +11,7 @@ und funktioniert auch offline.
 
 | Was | Wie |
 |---|---|
+| 7-Tage-Challenge | Eintrag mit `typ: "challenge"` (Vorlage: „Gemeinsam Superkräfte entdecken“) – erscheint als eigener Button oben auf der Freebie-Seite, Tageskarten zum Durchwischen |
 | Neue Freebie-Kategorie | Eintrag in `freebies` mit `typ: "serie"` und einer Liste `uebungen` – jede Übung wird eine Karte zum Durchwischen (Vorlage: „Koordination für zu Hause“) |
 | Übung zu einer Kategorie hinzufügen | Einen Eintrag in deren `uebungen` ergänzen (Felder: titel, dauer, material, intro, schritte, liste, spiel, datei, steigerung, tipp, warum, figur, neu) |
 | Neue Übung hervorheben | Bei der neuen Übung `neu: "JJJJ-MM-TT"` (Datum von heute) eintragen → 30 Tage lang „Neue Übung hinzugekommen“ in der Übersicht und „Neu“ auf der Karte |
