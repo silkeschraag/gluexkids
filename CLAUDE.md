@@ -38,6 +38,8 @@ Eltern werden geduzt.
   Koordination/Bewegung ist ein Weg dorthin, nicht das Hauptthema.
 - 7-Tage-Challenge „Gemeinsam Superkräfte entdecken“ (`typ: "challenge"`): eigener Button oben
   auf der Freebie-Seite, alle Tage sofort offen, vorerst ohne Druckversion (PDF hat noch alte Namen).
+- **Wochenimpulse und neue Übungen kommen über die App**, nicht über den Newsletter. Der
+  Newsletter ist nur für Kurs-Starts und Termine.
 - „Tiefer einsteigen?“ = Kurswerbung, nur passend zum Thema (Feld `kurs`) und auf der Startseite.
 - Die Gesprächskarten „Erzähl doch mal“ sind ein **Verkaufsprodukt** – nicht als Freebie-Bild
   verwenden; später mit Link zur Bestellseite.

@@ -272,8 +272,8 @@ window.GLUX_CONTENT = {
       },
       weiter: {
         titel: "Ihr wollt weitermachen?",
-        text: "Diese sieben Tage sind ein Anfang, kein Abschluss. In meinem Newsletter schicke ich dir regelmäßig kleine Übungen für zu Hause – und du erfährst als Erste, wann neue Kurse starten.",
-        punkte: ["Neue Kurse und Termine zuerst", "Übungen und Impulse für zu Hause", "Praxiswissen aus über 12 Jahren Kindertraining"],
+        text: "Diese sieben Tage sind ein Anfang, kein Abschluss. Schaut einfach regelmäßig hier in die App: Hier findet ihr jede Woche einen neuen Impuls, neue Übungen für zu Hause – und erfahrt als Erste, wann neue Kurse starten.",
+        punkte: ["Jede Woche ein neuer Impuls", "Neue Übungen und Freebies für zu Hause", "Neue Kurse als Erste erfahren"],
         gruss: "Ich freue mich auf euch! Silke"
       }
     },

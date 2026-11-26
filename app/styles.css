@@ -321,6 +321,7 @@ main { padding: 8px 20px calc(var(--tabbar-h) + var(--safe-b) + 36px); outline: 
 .letter-fox { width: 84px; margin: 0 auto 10px; }
 .letter-list { text-align: left; max-width: 320px; margin: 0 auto 20px; border-top: 0; }
 .letter-list li { padding: 7px 0; border-bottom: 0; font-size: 14.5px; }
+.letter-install { display: flex; margin: 10px auto 0; padding: 12px 18px; font-size: 14px; }
 .letter-gruss { margin: 16px 0 0 !important; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--ink) !important; }
 
 /* ------------------------------------------------------- übungsserie */

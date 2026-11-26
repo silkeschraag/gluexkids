@@ -197,8 +197,8 @@
   function newsletterBand() {
     return `<section class="letter">
       <div class="ic">${icon('mail')}</div>
-      <h2>Jede Woche ein <em>Impuls</em></h2>
-      <p>Trag dich in meinen Newsletter ein – dann bekommst du neue Impulse und alle Kurs-Starts zuerst.</p>
+      <h2>Kein <em>Kurs-Start</em> mehr verpassen</h2>
+      <p>Trag dich in meinen Newsletter ein, dann erfährst du als Erste, wann neue Kurse und Termine starten.</p>
       <a class="btn btn-primary" href="${esc(C.einstellungen.newsletterLink)}" target="_blank" rel="noopener">Zum Newsletter</a>
     </section>`;
   }
@@ -418,7 +418,7 @@
         </section>
         <div class="links">
           <a class="card" href="${esc(s.webseite)}" target="_blank" rel="noopener">${icon('globe')} gluexkids.de – Kurse vor Ort ${icon('external')}</a>
-          <a class="card" href="${esc(s.newsletterLink)}" target="_blank" rel="noopener">${icon('mail')} Newsletter abonnieren ${icon('external')}</a>
+          <a class="card" href="${esc(s.newsletterLink)}" target="_blank" rel="noopener">${icon('mail')} Newsletter: Kurs-Starts & Termine ${icon('external')}</a>
           <a class="card" href="${esc(s.instagram)}" target="_blank" rel="noopener">${icon('heart')} Instagram ${icon('external')}</a>
           ${!isStandalone() ? `<a class="card" href="#" data-action="install">${icon('phone')} App installieren ${icon('chevron')}</a>` : ''}
         </div>
@@ -569,7 +569,8 @@
         <h2>${esc(f.weiter.titel)}</h2>
         <p>${rich(f.weiter.text)}</p>
         <ul class="checklist letter-list">${f.weiter.punkte.map((x) => `<li>${icon('check')}<span>${esc(x)}</span></li>`).join('')}</ul>
-        <a class="btn btn-primary" href="${esc(C.einstellungen.newsletterLink)}" target="_blank" rel="noopener">Jetzt eintragen</a>
+        <a class="btn btn-primary" href="#/impulse">Zu den Wochenimpulsen ${icon('arrow')}</a>
+        ${!isStandalone() ? `<button class="btn btn-ghost letter-install" data-action="install">${icon('phone')} App auf den Startbildschirm holen</button>` : ''}
         <p class="letter-gruss">${esc(f.weiter.gruss)}</p>
       </section>
       <div class="actions">
